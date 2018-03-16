@@ -935,7 +935,8 @@ extension CHKLineChartView {
         
         //绘制x轴标签
         //每个点的间隔宽度
-        let perPlotWidth: CGFloat = (secWidth - secPaddingLeft - secPaddingRight) / CGFloat(self.rangeTo - self.rangeFrom)
+        let range = CGFloat(max(1, min(dataRange, 1000)))
+        let perPlotWidth: CGFloat = range == 0.0 ? 0.0 : ((secWidth - secPaddingLeft - secPaddingRight) / range)
         let startY = section.frame.maxY
         var k: Int = 0
         var showXAxisReference = false

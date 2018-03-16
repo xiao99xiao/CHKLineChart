@@ -72,6 +72,7 @@ public extension Date {
         }
         let confromTimesp = Date(timeIntervalSince1970: TimeInterval(timestamp))
         let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = format
         time = formatter.string(from: confromTimesp)
         return time;

@@ -505,6 +505,11 @@ open class CHKLineChartView: UIView {
         self.selectedXAxisLabel?.font = self.labelFont
         self.selectedXAxisLabel?.backgroundColor = self.selectedBGColor
         self.selectedXAxisLabel?.textColor = self.selectedTextColor
+
+        //重置辅助线和准心颜色
+        self.verticalLineView?.backgroundColor = self.selectedBGColor
+        self.horizontalLineView?.backgroundColor = self.selectedBGColor
+        self.sightView?.backgroundColor = self.selectedBGColor
         
         let yaxis = section!.yAxis
         let format = "%.".appendingFormat("%df", yaxis.decimal)

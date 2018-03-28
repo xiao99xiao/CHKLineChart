@@ -427,8 +427,8 @@ extension CHSection {
             let range = NSMakeRange(start, title.ch_length)
             //            NSLog("title = \(title)")
             //            NSLog("range = \(range)")
-            let colorAttribute = [NSAttributedStringKey.foregroundColor: color]
-            titleString.addAttributes(colorAttribute, range: range)
+            let attributes = [NSAttributedStringKey.foregroundColor: color, NSAttributedStringKey.font: labelFont] as [NSAttributedStringKey : Any]
+            titleString.addAttributes(attributes, range: range)
             start += title.ch_length
         }
         

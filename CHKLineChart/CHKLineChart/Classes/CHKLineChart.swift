@@ -407,6 +407,7 @@ open class CHKLineChartView: UIView {
      初始化数据
      */
     fileprivate func resetData() {
+        self.deselectIndex()
         self.datas.removeAll()
         self.plotCount = self.delegate?.numberOfPointsInKLineChart(chart: self) ?? 0
         
@@ -656,7 +657,19 @@ open class CHKLineChartView: UIView {
         self.delegate?.kLineChart?(chart: self, didSelectAt: index, item: item)
         
     }
-    
+
+    /**
+     设置选中的数据点
+     */
+    func deselectIndex() {
+        self.selectedIndex = -1
+        self.selectedPoint = CGPoint.zero
+        self.verticalLineView?.isHidden = true
+        self.horizontalLineView?.isHidden = true
+        self.selectedYAxisLabel?.isHidden = true
+        self.selectedXAxisLabel?.isHidden = true
+        self.sightView?.isHidden = true
+    }
 }
 
 // MARK: - 绘图相关方法

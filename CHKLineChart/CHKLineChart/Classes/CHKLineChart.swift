@@ -1608,6 +1608,19 @@ extension CHKLineChartView: UIGestureRecognizerDelegate {
             return false
         }
     }
+    
+
+    /// 避免在UIScrollView滚动时触发图表的细微滚动
+    ///
+    override open func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer, let _ = gestureRecognizer.view as? CHKLineChartView {
+            let velocity = gestureRecognizer.velocity(in: self)
+            if abs(velocity.y) > abs(velocity.x) {
+                return false
+            }
+        }
+        return true
+    }
 
 
     /// 兼容放在UIScrollView中的滚动情况

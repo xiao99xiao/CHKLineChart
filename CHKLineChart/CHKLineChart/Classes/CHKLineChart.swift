@@ -1608,8 +1608,18 @@ extension CHKLineChartView: UIGestureRecognizerDelegate {
             return false
         }
     }
-   
-    
+
+
+    /// 兼容放在UIScrollView中的滚动情况
+    ///
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let _ = gestureRecognizer as? UIPanGestureRecognizer, let _ = otherGestureRecognizer as? UIPanGestureRecognizer {
+            return true
+        }else{
+            return false
+        }
+    }
+
     
     /// 平移拖动操作
     ///

@@ -423,6 +423,7 @@ extension CHSection {
         var start = 0
         let titleString = NSMutableAttributedString()
         for (title, color) in titles {
+            let title = title + "\n"
             titleString.append(NSAttributedString(string: title))
             let range = NSMakeRange(start, title.ch_length)
             //            NSLog("title = \(title)")

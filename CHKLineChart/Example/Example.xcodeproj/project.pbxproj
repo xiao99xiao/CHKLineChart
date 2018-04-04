@@ -13,7 +13,6 @@
 		C58173E82047E47800598AE2 /* SeriesParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58173E72047E47800598AE2 /* SeriesParam.swift */; };
 		C58173EA2047E64300598AE2 /* SeriesSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58173E92047E64300598AE2 /* SeriesSettingCell.swift */; };
 		C5AF869A2053C3A9000C7F14 /* CHKLineChartKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5AF86992053C3A9000C7F14 /* CHKLineChartKit.framework */; };
-		C5AF869B2053C3A9000C7F14 /* CHKLineChartKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C5AF86992053C3A9000C7F14 /* CHKLineChartKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C5DAC4132044F25500D16B84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DAC4122044F25500D16B84 /* AppDelegate.swift */; };
 		C5DAC4182044F25500D16B84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5DAC4162044F25500D16B84 /* Main.storyboard */; };
 		C5DAC41A2044F25500D16B84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C5DAC4192044F25500D16B84 /* Assets.xcassets */; };
@@ -56,20 +55,6 @@
 			remoteInfo = Example;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		C5AF869C2053C3A9000C7F14 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				C5AF869B2053C3A9000C7F14 /* CHKLineChartKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1B442F95CFE9EA0B2B1C0BE5 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -289,7 +274,6 @@
 				C5DAC40D2044F25500D16B84 /* Resources */,
 				ABE71615878980D4C63F2A39 /* [CP] Embed Pods Frameworks */,
 				67DF738467686647B6582ADD /* [CP] Copy Pods Resources */,
-				C5AF869C2053C3A9000C7F14 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

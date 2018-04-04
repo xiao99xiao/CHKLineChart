@@ -501,7 +501,7 @@ extension CHSection {
                 title += NSLocalizedString("C", comment: "") + ": " +
                     item.closePrice.ch_toString(maxF: self.decimal) + "  "  //收市
                 title += NSLocalizedString("R", comment: "") + ": " +
-                    amplitude.ch_toString(maxF: self.decimal) + "%   "        //振幅
+                    amplitude.ch_toString(maxF: 2) + "%   "        //振幅
                 
             case is CHColumnModel:
                 

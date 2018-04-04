@@ -329,7 +329,7 @@ public extension CHKLineChartStyle {
 
 ## Contribution（贡献更多指标）
 
-本人现在很少专注K线图表的开发工作，大部分时间投入到区块链的研究与开发工作，如果你感兴趣，可以[联系我](#Author)。
+本人现在很少专注K线图表的开发工作，大部分时间投入到区块链的研究与开发工作，如果你感兴趣，可以[联系我](#author)。
 
 如果你对本K线指标的开发感兴趣，请fork项目，给大家Pull requests更多技术指标。
 

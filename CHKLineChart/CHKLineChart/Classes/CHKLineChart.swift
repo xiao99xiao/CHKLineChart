@@ -1440,7 +1440,7 @@ extension CHKLineChartView {
             //双指张开
             newRangeTo = self.rangeTo - interval
             newRangeFrom = self.rangeFrom + interval
-            newRange = self.rangeTo - self.rangeFrom
+            newRange = newRangeTo - newRangeFrom
             if newRange >= kMinRange {
                 
                 if self.plotCount > self.rangeTo - self.rangeFrom {

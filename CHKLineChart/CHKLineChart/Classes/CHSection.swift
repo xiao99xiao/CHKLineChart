@@ -485,10 +485,10 @@ extension CHSection {
                     continue  //不限蜡烛柱
                 }
                 
-                //振幅
-                var amplitude: CGFloat = 0
+                //涨跌幅
+                var change: CGFloat = 0
                 if item.openPrice > 0 {
-                    amplitude = (item.closePrice - item.openPrice) / item.openPrice * 100
+                    change = (item.closePrice - item.openPrice) / item.openPrice * 100
                 }
                 
                 
@@ -500,8 +500,8 @@ extension CHSection {
                     item.lowPrice.ch_toString(maxF: self.decimal) + "  "    //最低
                 title += NSLocalizedString("C", comment: "") + ": " +
                     item.closePrice.ch_toString(maxF: self.decimal) + "  "  //收市
-                title += NSLocalizedString("R", comment: "") + ": " +
-                    amplitude.ch_toString(maxF: 2) + "%   "        //振幅
+                title += NSLocalizedString("Chg", comment: "") + ": " +
+                    change.ch_toString(maxF: 2) + "%   "        //涨跌幅
                 
             case is CHColumnModel:
                 

@@ -509,7 +509,7 @@ extension CHSection {
                     continue  //不是量线
                 }
                 
-                title += model.title + ": " + item.vol.ch_toString(maxF: self.decimal) + "  "
+                title += model.title + ": " + item.vol.ch_toString(maxF: max(self.decimal, 4)) + "  "
             default:
                 if item.value != nil {
                     title += model.title + ": " + item.value!.ch_toString(maxF: self.decimal) + "  "

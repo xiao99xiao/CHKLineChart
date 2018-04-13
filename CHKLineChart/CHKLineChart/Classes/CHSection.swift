@@ -352,6 +352,7 @@ extension CHSection {
         }
         
         if self.paging {     //如果分页
+            guard self.selectedIndex < self.series.count else{return}
             let series = self.series[self.selectedIndex]
             if let attributes = self.getTitleAttributesByIndex(chartSelectedIndex, series: series) {
                 self.setHeader(titles: attributes)

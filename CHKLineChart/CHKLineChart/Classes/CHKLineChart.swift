@@ -1295,6 +1295,7 @@ extension CHKLineChartView {
     func drawChart(_ section: CHSection) {
         if section.paging {
             //如果section以分页显示，则读取当前显示的系列
+            guard section.selectedIndex < section.series.count else{return}
             let serie = section.series[section.selectedIndex]
             let seriesLayer = self.drawSerie(serie)
             section.sectionLayer.addSublayer(seriesLayer)

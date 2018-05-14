@@ -1634,6 +1634,14 @@ extension CHKLineChartView: UIGestureRecognizerDelegate {
         }
     }
 
+    /// 在横向滚动时避免触发外部UIScrollView的滚动
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let _ = gestureRecognizer as? UIPanGestureRecognizer, let _ = otherGestureRecognizer as? UIPanGestureRecognizer {
+            return true
+        }else{
+            return false
+        }
+    }
     
     /// 平移拖动操作
     ///

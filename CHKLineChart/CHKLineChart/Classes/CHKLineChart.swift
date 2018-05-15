@@ -1642,6 +1642,15 @@ extension CHKLineChartView: UIGestureRecognizerDelegate {
             return false
         }
     }
+
+    /// 兼容屏幕侧滑返回手势
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let _ = gestureRecognizer as? UIPanGestureRecognizer, let _ = otherGestureRecognizer as? UIScreenEdgePanGestureRecognizer {
+            return true
+        }else{
+            return false
+        }
+    }
     
     /// 平移拖动操作
     ///

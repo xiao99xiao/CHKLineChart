@@ -471,9 +471,10 @@ open class CHKLineChartView: UIView {
      - parameter point:
      */
     func setSelectedIndexByPoint(_ point: CGPoint) {
+
+        let dataRange = self.rangeTo - self.rangeFrom
         
-        
-        guard self.enableTap else {
+        guard self.enableTap, dataRange != 0 else {
             return
         }
         
@@ -520,7 +521,7 @@ open class CHKLineChartView: UIView {
         self.selectedPoint = point
         
         //每个点的间隔宽度
-        let plotWidth = (section!.frame.size.width - section!.padding.left - section!.padding.right) / CGFloat(self.rangeTo - self.rangeFrom)
+        let plotWidth = (section!.frame.size.width - section!.padding.left - section!.padding.right) / CGFloat(dataRange)
         
         var yVal: CGFloat = 0        //获取y轴坐标的实际值
         
@@ -1659,8 +1660,10 @@ extension CHKLineChartView: UIGestureRecognizerDelegate {
     ///
     /// - Parameter sender: 手势
     @objc func doPanAction(_ sender: UIPanGestureRecognizer) {
-        
-        guard self.enablePan else {
+
+        let dataRange = self.rangeTo - self.rangeFrom
+
+        guard self.enablePan, dataRange != 0 else {
             return
         }
         
@@ -1678,7 +1681,7 @@ extension CHKLineChartView: UIGestureRecognizerDelegate {
         }
         
         //该分区每个点的间隔宽度
-        let plotWidth = (section.frame.size.width - section.padding.left - section.padding.right) / CGFloat(self.rangeTo - self.rangeFrom)
+        let plotWidth = (section.frame.size.width - section.padding.left - section.padding.right) / CGFloat(dataRange)
         
         switch sender.state {
         case .began:
@@ -1772,8 +1775,10 @@ extension CHKLineChartView: UIGestureRecognizerDelegate {
     ///
     /// - Parameter sender: 手势
     @objc func doPinchAction(_ sender: UIPinchGestureRecognizer) {
-        
-        guard self.enablePinch else {
+
+        let dataRange = self.rangeTo - self.rangeFrom
+
+        guard self.enablePinch, dataRange != 0 else {
             return
         }
         
@@ -1786,7 +1791,7 @@ extension CHKLineChartView: UIGestureRecognizerDelegate {
         }
         
         //该分区每个点的间隔宽度
-        let plotWidth = (section.frame.size.width - section.padding.left - section.padding.right) / CGFloat(self.rangeTo - self.rangeFrom)
+        let plotWidth = (section.frame.size.width - section.padding.left - section.padding.right) / CGFloat(dataRange)
         
         
         //双指合拢或张开

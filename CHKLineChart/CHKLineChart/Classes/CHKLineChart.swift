@@ -1763,6 +1763,10 @@ extension CHKLineChartView: UIGestureRecognizerDelegate {
                 self.delegate?.kLineChart?(chart: self, didFlipPageSeries: section!, series: section!.series[section!.selectedIndex], seriesIndex: section!.selectedIndex)
             } else {
                 //显示点击选中的内容
+                guard !self.datas.isEmpty else{
+                    self.delegate?.kLineChart?(chart: self, didSelectAt: 0, item: CHChartItem())
+                    return
+                }
                 self.setSelectedIndexByPoint(point)
             }
             

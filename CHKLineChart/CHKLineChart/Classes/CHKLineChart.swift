@@ -582,7 +582,7 @@ open class CHKLineChartView: UIView {
                 case .none:
                     self.selectedYAxisLabel?.isHidden = true
                 }
-                self.selectedYAxisLabel?.text = String(format: format, yVal)     //显示实际值
+                self.selectedYAxisLabel?.text = yVal.ch_toString(0, maxF: yaxis.decimal, minI: 1)     //显示实际值
                 self.selectedYAxisLabel?.frame = CGRect(x: yAxisStartX, y: vy - self.labelSize.height / 2, width: self.yAxisLabelWidth, height: self.labelSize.height)
                 let time = Date.ch_getTimeByStamp(item.time, format: "yyyy-MM-dd HH:mm") //显示实际值
                 let size = time.ch_sizeWithConstrained(self.labelFont)

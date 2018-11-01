@@ -241,6 +241,12 @@ open class CHDepthChartView: UIView {
     
     /// 卖方深度数据
     open var askItems = [CHKDepthChartItem]()
+
+    /// 买方标题
+    open var bidTitle = "Bid"
+
+    /// 卖方标题
+    open var askTitle = "Ask"
     
     /// 用于图表的图层
     var drawLayer: CHShapeLayer = CHShapeLayer()
@@ -1103,9 +1109,9 @@ extension CHDepthChartView {
             // 买卖类型
             let typelayer = CHTextLayer()
             if item.type == .bid{
-                typelayer.string = "买"
+                typelayer.string = bidTitle
             }else{
-                typelayer.string = "卖"
+                typelayer.string = askTitle
             }
             typelayer.frame = textRect
             typelayer.alignmentMode = kCAAlignmentLeft

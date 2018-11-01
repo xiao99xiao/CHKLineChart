@@ -166,8 +166,8 @@ open class CHKDepthChartItem: NSObject {
 open class CHDepthChartView: UIView {
     
     /// MARK: - 常量
-    open let kYAxisLabelWidth: CGFloat = 46        //默认宽度
-    open let kXAxisHegiht: CGFloat = 16        //默认X坐标的高度
+    public let kYAxisLabelWidth: CGFloat = 46        //默认宽度
+    public let kXAxisHeight: CGFloat = 16        //默认X坐标的高度
     
     /// MARK: - 成员变量
     open var bidColor: (stroke: UIColor, fill: UIColor, lineWidth: CGFloat) = (.green, .green, 1)

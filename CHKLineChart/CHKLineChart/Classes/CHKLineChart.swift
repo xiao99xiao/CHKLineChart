@@ -159,7 +159,7 @@ open class CHKLineChartView: UIView {
     let kMaxRange = 133     //最大缩放范围
     let kPerInterval = 4    //缩放的每段间隔
     open let kYAxisLabelWidth: CGFloat = 46        //默认宽度
-    open let kXAxisHegiht: CGFloat = 16        //默认X坐标的高度
+    open let kXAxisHeight: CGFloat = 16        //默认X坐标的高度
     
     /// MARK: - 成员变量
     @IBInspectable open var upColor: UIColor = UIColor.green     //升的颜色
@@ -862,7 +862,7 @@ extension CHKLineChartView {
         var height = self.frame.size.height - (self.padding.top + self.padding.bottom)
         let width  = self.frame.size.width - (self.padding.left + self.padding.right)
         
-        let xAxisHeight = self.delegate?.heightForXAxisInKLineChart?(in: self) ?? self.kXAxisHegiht
+        let xAxisHeight = self.delegate?.heightForXAxisInKLineChart?(in: self) ?? self.kXAxisHeight
         height = height - xAxisHeight
         
         var total = 0

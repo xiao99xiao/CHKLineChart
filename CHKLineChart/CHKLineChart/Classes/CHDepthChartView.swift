@@ -1134,14 +1134,7 @@ extension CHDepthChartView {
             // 量
             let vollayer = CHTextLayer()
             let amount = item.depthAmount
-            var amountStr = ""
-            if amount >= 1000{
-                let newValue = amount / 1000
-                amountStr = String(format: "%.0fK", newValue)
-            }else {
-                amountStr = amount.ch_toString(maxF:self.numDecimal)//String(Double(amount))
-            }
-            vollayer.string = amountStr
+            vollayer.string = amount.ch_toString(maxF:self.numDecimal)
             textRect = CGRect(x: textRect.origin.x, y: textRect.origin.y + textHeight, width: width - padding, height: textHeight)
             vollayer.frame = textRect
             vollayer.alignmentMode = kCAAlignmentLeft

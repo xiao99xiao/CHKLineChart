@@ -1162,7 +1162,7 @@ extension CHDepthChartView {
         
         var startIndex = 0
         var xAxisToDraw = [(CGRect,String)]()
-        guard self.plotCount > 0 else {
+        guard self.plotCount > 0, let lastAskItem = self.askItems.last, let lastBidItem = self.bidItems.last else {
             return []
         }
         if self.bidChartOnDirection == .right{
@@ -1172,7 +1172,7 @@ extension CHDepthChartView {
             let asksY = self.bounds.origin.y + self.bounds.size.height
             let asksRect = CGRect(x: asksX, y: asksY, width: 60, height: 18)
             //            print("self.askItems.startIndex = \(self.askItems.startIndex)")
-            let asksValue = self.askItems[self.askItems.endIndex - 1].value.ch_toString()
+            let asksValue = lastAskItem.value.ch_toString()
             xAxisToDraw.append((asksRect, asksValue))
             
             //绘制卖方深度图层
@@ -1186,12 +1186,12 @@ extension CHDepthChartView {
             let sell1X = self.bounds.origin.x + self.padding.left + CGFloat(startIndex) * plotWidth - 60 - 8
             let sell1Y = asksY
             let sell1Rect = CGRect(x: sell1X, y: sell1Y, width: 60, height: 18)
-            xAxisToDraw.append((sell1Rect, self.askItems[self.askItems.endIndex - 1].value.ch_toString()))
+            xAxisToDraw.append((sell1Rect, lastAskItem.value.ch_toString()))
             
             let buy1X = self.bounds.origin.x + self.padding.left + CGFloat(startIndex) * plotWidth + 8
             let buy1Y = asksY
             let buy1Rect = CGRect(x: buy1X, y: buy1Y, width: 60, height: 18)
-            xAxisToDraw.append((buy1Rect, self.bidItems[self.bidItems.endIndex - 1].value.ch_toString()))
+            xAxisToDraw.append((buy1Rect, lastBidItem.value.ch_toString()))
             
             //绘制买方深度图层
             self.bidItems = self.bidItems.reversed()
@@ -1205,7 +1205,7 @@ extension CHDepthChartView {
             let bidsY = asksY
             let bidsRect = CGRect(x: bidsX, y: bidsY, width: 60, height: 18)
             //            print("self.bidItems.endIndex = \(self.bidItems.endIndex)")
-            xAxisToDraw.append((bidsRect, self.bidItems[self.bidItems.endIndex - 1].value.ch_toString()))
+            xAxisToDraw.append((bidsRect, lastBidItem.value.ch_toString()))
             
             return xAxisToDraw
         }else{
@@ -1226,12 +1226,12 @@ extension CHDepthChartView {
             let buy1X = self.bounds.origin.x + self.padding.left + CGFloat(startIndex) * plotWidth - 60 - 8
             let buy1Y = bidsY
             let buy1Rect = CGRect(x: buy1X, y: buy1Y, width: 60, height: 18)
-            xAxisToDraw.append((buy1Rect, self.bidItems[self.bidItems.endIndex - 1].value.ch_toString()))
+            xAxisToDraw.append((buy1Rect, lastBidItem.value.ch_toString()))
             
             let sell1X = self.bounds.origin.x + self.padding.left + CGFloat(startIndex) * plotWidth + 8
             let sell1Y = bidsY
             let sell1Rect = CGRect(x: sell1X, y: sell1Y, width: 60, height: 18)
-            xAxisToDraw.append((sell1Rect, self.askItems[self.askItems.startIndex].value.ch_toString()))
+            xAxisToDraw.append((sell1Rect, lastAskItem.value.ch_toString()))
             
             //绘制卖方深度图层
             if let askChartLayer = self.drawDepthChart(items: self.askItems, startIndex: startIndex, strokeColor: self.askColor.stroke, fillColor: self.askColor.fill, lineWidth: self.askColor.lineWidth) {
@@ -1243,7 +1243,7 @@ extension CHDepthChartView {
             let asksX = self.bounds.origin.x + self.padding.left + CGFloat(startIndex) * plotWidth - 60
             let asksY = bidsY
             let asksRect = CGRect(x: asksX, y: asksY, width: 60, height: 18)
-            xAxisToDraw.append((asksRect, self.askItems[self.askItems.endIndex - 1].value.ch_toString()))
+            xAxisToDraw.append((asksRect, lastAskItem.value.ch_toString()))
             
             return xAxisToDraw
         }

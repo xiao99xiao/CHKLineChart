@@ -158,8 +158,8 @@ open class CHKLineChartView: UIView {
     let kMinRange = 13       //最小缩放范围
     let kMaxRange = 133     //最大缩放范围
     let kPerInterval = 4    //缩放的每段间隔
-    open let kYAxisLabelWidth: CGFloat = 46        //默认宽度
-    open let kXAxisHeight: CGFloat = 16        //默认X坐标的高度
+    public let kYAxisLabelWidth: CGFloat = 46        //默认宽度
+    public let kXAxisHeight: CGFloat = 16        //默认X坐标的高度
     
     /// MARK: - 成员变量
     @IBInspectable open var upColor: UIColor = UIColor.green     //升的颜色
@@ -516,7 +516,6 @@ open class CHKLineChartView: UIView {
         self.sightView?.backgroundColor = self.selectedBGColor
         
         let yaxis = section!.yAxis
-        let format = "%.".appendingFormat("%df", yaxis.decimal)
         
         self.selectedPoint = point
         

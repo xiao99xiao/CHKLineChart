@@ -350,7 +350,7 @@ open class CHDepthChartView: UIView {
     
     /// 根据数据集合计算出每个元素的深度
     ///
-    /// - Parameter item: 数据集合
+    /// - Parameter item: 数据集合（从左到右的顺序排列）
     fileprivate func computeDepthValue(for items: [CHKDepthChartItem], type: CHKDepthChartItemType) {
         
         var depth: CGFloat = 0
@@ -358,25 +358,25 @@ open class CHDepthChartView: UIView {
         if self.style.bidChartOnDirection == .left{
             if type == .bid {
                 //买单深度是由价格大到小地累计
-                start = items.count - 1
+                start = items.endIndex - 1
                 end = 0
                 step = -1
             } else {
-                //卖单深度是由价格大到小地累计
+                //卖单深度是由价格小到大地累计
                 start = 0
-                end = items.count - 1
+                end = items.endIndex - 1
                 step = 1
             }
         }else{
             if type == .ask {
-                //卖单深度是由价格大到小地累计
-                start = items.count - 1
+                //卖单深度是由价格小到大地累计
+                start = items.endIndex - 1
                 end = 0
                 step = -1
             } else {
                 //买单深度是由价格大到小地累计
                 start = 0
-                end = items.count - 1
+                end = items.endIndex - 1
                 step = 1
             }
         }

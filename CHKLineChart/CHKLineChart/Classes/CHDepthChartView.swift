@@ -984,7 +984,7 @@ extension CHDepthChartView {
         let xAxis = CHShapeLayer()
         var alignment = kCAAlignmentCenter
         
-        let startY = self.bounds.maxY //需要显示x坐标标签名字的分区，再最下方显示
+        let startY = self.bounds.maxY - self.labelFont.lineHeight //需要显示x坐标标签名字的分区，再最下方显示
         //绘制x坐标标签，x的位置通过画辅助线时计算得出
         for (index,(var barLabelRect, xLabel)) in xAxisToDraw.enumerated() {
             if index == 0 || index == 2{

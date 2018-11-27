@@ -424,7 +424,8 @@ extension CHSection {
         var start = 0
         let titleString = NSMutableAttributedString()
         for (title, color) in titles {
-            if String(titleString.string.split(separator: "\n").last ?? "").count + title.count > 60 {
+            let currentCount = String(titleString.string.split(separator: "\n").last ?? "").count
+            if currentCount > 0, currentCount + title.count > 60 {
                 titleString.append(NSAttributedString(string: "\n"))
             }
             titleString.append(NSAttributedString(string: title))

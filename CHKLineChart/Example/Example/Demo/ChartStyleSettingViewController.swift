@@ -127,9 +127,9 @@ class ChartStyleSettingViewController: UIViewController {
         super.viewDidLoad()
         self.setupUI()
         
-        self.segmentTheme.selectedSegmentIndex = self.themes.index(of: self.styleParam.theme) ?? self.selectedTheme
-        self.segmentYAxisSide.selectedSegmentIndex = self.yAxisSides.index(of: self.styleParam.showYAxisLabel) ?? self.selectedYAxisSide
-        self.segmentCandleColor.selectedSegmentIndex = self.candleColors.index(of: self.styleParam.candleColors) ?? self.selectedCandleColor
+        self.segmentTheme.selectedSegmentIndex = self.themes.firstIndex(of: self.styleParam.theme) ?? self.selectedTheme
+        self.segmentYAxisSide.selectedSegmentIndex = self.yAxisSides.firstIndex(of: self.styleParam.showYAxisLabel) ?? self.selectedYAxisSide
+        self.segmentCandleColor.selectedSegmentIndex = self.candleColors.firstIndex(of: self.styleParam.candleColors) ?? self.selectedCandleColor
         self.switchInnerYAxis.isOn = self.styleParam.isInnerYAxis
     }
     

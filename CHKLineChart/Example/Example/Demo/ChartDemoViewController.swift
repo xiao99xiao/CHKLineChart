@@ -57,7 +57,7 @@ class ChartDemoViewController: UIViewController {
         self.contentView.addConstraints(
             NSLayoutConstraint.constraints(
                 withVisualFormat: "H:|-0-[chartView]-0-|",
-                options: NSLayoutFormatOptions(),
+                options: NSLayoutConstraint.FormatOptions(),
                 metrics: nil,
                 views:["chartView": self.chartView]))
         
@@ -65,7 +65,7 @@ class ChartDemoViewController: UIViewController {
         self.contentView.addConstraints(
             NSLayoutConstraint.constraints(
                 withVisualFormat: "V:|-0-[chartView]-0-|",
-                options: NSLayoutFormatOptions(),
+                options: NSLayoutConstraint.FormatOptions(),
                 metrics: nil,
                 views:["chartView": self.chartView]))
     }
@@ -325,7 +325,7 @@ extension ChartDemoViewController {
 public extension CHKLineChartStyle {
     
     //实现一个最基本的样式，开发者可以自由扩展配置样式
-    public static var best: CHKLineChartStyle {
+    static var best: CHKLineChartStyle {
         let style = CHKLineChartStyle()
         style.labelFont = UIFont.systemFont(ofSize: 10)
         style.lineColor = UIColor(white: 0.2, alpha: 1)

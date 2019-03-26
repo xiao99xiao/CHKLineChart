@@ -115,7 +115,7 @@ class StyleParam: NSObject, Codable {
 public extension CHKLineChartStyle {
     
     //实现一个自定义的明亮风格样式，开发者可以自由扩展配置样式
-    public static var customLight: CHKLineChartStyle {
+    static var customLight: CHKLineChartStyle {
         
         /*** 明亮风格 ***/
         
@@ -298,7 +298,7 @@ public extension CHKLineChartStyle {
     }
     
     //实现一个暗黑风格的样式，开发者可以自由扩展配置样式
-    public static var customDark: CHKLineChartStyle {
+    static var customDark: CHKLineChartStyle {
         
         /*** 暗黑风格 ***/
         
@@ -483,7 +483,7 @@ public extension CHKLineChartStyle {
     
     
     //实现一个暗黑风格的点线简单图表
-    public static var simpleLineDark: CHKLineChartStyle {
+    static var simpleLineDark: CHKLineChartStyle {
         
         /*** 暗黑风格 ***/
         

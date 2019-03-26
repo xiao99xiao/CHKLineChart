@@ -411,7 +411,7 @@ extension CHSection {
             
         }
         
-        mainView.bringSubview(toFront: self.titleView!)
+        mainView.bringSubviewToFront(self.titleView!)
         
     }
     
@@ -432,7 +432,7 @@ extension CHSection {
             let range = NSMakeRange(start, title.ch_length)
             //            NSLog("title = \(title)")
             //            NSLog("range = \(range)")
-            let attributes = [NSAttributedStringKey.foregroundColor: color, NSAttributedStringKey.font: labelFont] as [NSAttributedStringKey : Any]
+            let attributes = [NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.font: labelFont] as [NSAttributedString.Key : Any]
             titleString.addAttributes(attributes, range: range)
             start += title.ch_length
         }

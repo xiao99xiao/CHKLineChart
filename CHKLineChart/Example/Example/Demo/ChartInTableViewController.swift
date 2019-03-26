@@ -43,9 +43,9 @@ class ChartInTableViewController: UIViewController {
                 [weak self](flag, chartsData) in
                 if flag && chartsData.count > 0 {
                     self?.klineDatas[symbol] = chartsData
-                    let row = self?.exPairs.index(of: symbol)
+                    let row = self?.exPairs.firstIndex(of: symbol)
                     self?.tableView.reloadRows(at: [IndexPath(row: row!, section: 0)],
-                                              with: UITableViewRowAnimation.automatic)
+                                              with: UITableView.RowAnimation.automatic)
                     
                 }
         }

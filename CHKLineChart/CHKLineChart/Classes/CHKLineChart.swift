@@ -1345,7 +1345,24 @@ extension CHKLineChartView {
         }
         self.drawLayerView()
     }
-    
+
+    /**
+     更新最近一根柱子的值，或刷新视图
+     */
+    public func updateData() {
+        if let plotCount = self.delegate?.numberOfPointsInKLineChart(chart: self), plotCount > 0, let newLastItem = self.delegate?.kLineChart(chart: self, valueForPointAtIndex: plotCount - 1), let oldLastItem = self.datas.last, newLastItem.time == oldLastItem.time {
+            self.datas[plotCount - 1] = newLastItem
+
+            //执行算法方程式计算值，添加到对象中
+            for algorithm in self.handlerOfAlgorithms {
+                //执行该算法，计算指标数据
+                self.datas = algorithm.handleAlgorithm(self.datas)
+            }
+            self.drawLayerView()
+        } else {
+            reloadData(toPosition: CHChartViewScrollPosition.none, resetData: true)
+        }
+    }
     
     /// 刷新风格
     ///

@@ -1350,7 +1350,7 @@ extension CHKLineChartView {
      更新最近一根柱子的值，或刷新视图
      */
     public func updateData() {
-        if let plotCount = self.delegate?.numberOfPointsInKLineChart(chart: self), plotCount > 0, let newLastItem = self.delegate?.kLineChart(chart: self, valueForPointAtIndex: plotCount - 1), let oldLastItem = self.datas.last, newLastItem.time == oldLastItem.time {
+        if let plotCount = self.delegate?.numberOfPointsInKLineChart(chart: self), plotCount > 0, self.plotCount == plotCount, let newLastItem = self.delegate?.kLineChart(chart: self, valueForPointAtIndex: plotCount - 1), let oldLastItem = self.datas.last, newLastItem.time == oldLastItem.time {
             self.datas[plotCount - 1] = newLastItem
 
             //执行算法方程式计算值，添加到对象中
@@ -1360,7 +1360,11 @@ extension CHKLineChartView {
             }
             self.drawLayerView()
         } else {
-            reloadData(toPosition: CHChartViewScrollPosition.none, resetData: true)
+            if self.rangeTo == self.plotCount {
+                reloadData(toPosition: CHChartViewScrollPosition.end, resetData: true)
+            } else {
+                reloadData(toPosition: CHChartViewScrollPosition.none, resetData: true)
+            }
         }
     }
     

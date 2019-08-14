@@ -1359,12 +1359,14 @@ extension CHKLineChartView {
                 self.datas = algorithm.handleAlgorithm(self.datas)
             }
             self.drawLayerView()
-        } else {
+        } else if let plotCount = self.delegate?.numberOfPointsInKLineChart(chart: self), plotCount > 0 {
             if self.rangeTo == self.plotCount {
                 reloadData(toPosition: CHChartViewScrollPosition.end, resetData: true)
             } else {
                 reloadData(toPosition: CHChartViewScrollPosition.none, resetData: true)
             }
+        } else {
+            resetData()
         }
     }
     

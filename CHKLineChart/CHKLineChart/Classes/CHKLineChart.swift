@@ -1161,45 +1161,60 @@ extension CHKLineChartView {
 //        if (yaxis.tickInterval % 2 == 1) {
 //            yaxis.tickInterval += 1
 //        }
-        
-        //计算y轴的标签及虚线分几段
-        let step = (yaxis.max - yaxis.min) / CGFloat(yaxis.tickInterval)
-        
-        //从base值绘制Y轴标签到最大值
-        var i = 0
-        var yVal = yaxis.baseValue + CGFloat(i) * step
-        while yVal <= yaxis.max && i <= yaxis.tickInterval {
-            
-            valueToDraw.insert(yVal)
-            
-            //递增下一个
-            i =  i + 1
-            yVal = yaxis.baseValue + CGFloat(i) * step
-            
-        }
-        
-        i = 0
-        yVal = yaxis.baseValue - CGFloat(i) * step
-        while yVal >= yaxis.min && i <= yaxis.tickInterval {
-            
-            valueToDraw.insert(yVal)
-            
-            //递增下一个
-            i =  i + 1
+
+        if yaxis.tickInterval == 0 {
+            if yaxis.min == yaxis.baseValue {
+                valueToDraw.insert(yaxis.max)
+            } else {
+                valueToDraw.insert(yaxis.min)
+                let mid = (yaxis.min + yaxis.max)/2
+                if mid != 0 {
+                    valueToDraw.insert(mid)
+                }
+                valueToDraw.insert(yaxis.max)
+            }
+        } else {
+            //计算y轴的标签及虚线分几段
+            let step = (yaxis.max - yaxis.min) / CGFloat(yaxis.tickInterval)
+
+            //从base值绘制Y轴标签到最大值
+            var i = 0
+            var yVal = yaxis.baseValue + CGFloat(i) * step
+            while yVal <= yaxis.max && i <= yaxis.tickInterval {
+
+                valueToDraw.insert(yVal)
+
+                //递增下一个
+                i =  i + 1
+                yVal = yaxis.baseValue + CGFloat(i) * step
+
+            }
+
+            i = 0
             yVal = yaxis.baseValue - CGFloat(i) * step
+            while yVal >= yaxis.min && i <= yaxis.tickInterval {
+
+                valueToDraw.insert(yVal)
+
+                //递增下一个
+                i =  i + 1
+                yVal = yaxis.baseValue - CGFloat(i) * step
+            }
         }
         
         for (i, yVal) in valueToDraw.enumerated() {
-            
+
+            let isTop = valueToDraw.max() == yVal
+            let isBottom = valueToDraw.min() == yVal
             
             //画虚线和Y标签值
             let iy = section.getLocalY(yVal)
             
             if self.isInnerYAxis {
                 //y轴标签向内显示，为了不挡住辅助线，所以把y轴的数值位置向上移一些
-                startY = iy - 14
+                startY = iy - labelFont.capHeight - 7
             } else {
-                startY = iy - 7
+                startY = iy - labelFont.capHeight
             }
             
             let referencePath = UIBezierPath()
@@ -1220,7 +1235,7 @@ extension CHKLineChartView {
                 startY = iy - 7
             }
             
-            if showYAxisReference {
+            if showYAxisReference, !isTop && !isBottom {
                 
                 //突出的线段，y轴向外显示才划突出线段
                 if !self.isInnerYAxis {

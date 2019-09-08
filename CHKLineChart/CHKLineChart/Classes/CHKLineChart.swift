@@ -526,6 +526,7 @@ open class CHKLineChartView: UIView {
         var yVal: CGFloat = 0        //获取y轴坐标的实际值
         
         for i in self.rangeFrom...self.rangeTo - 1 {
+            guard i < self.datas.count else {continue}
             let ixs = plotWidth * CGFloat(i - self.rangeFrom) + section!.padding.left + self.padding.left
             let ixe = plotWidth * CGFloat(i - self.rangeFrom + 1) + section!.padding.left + self.padding.left
             //            NSLog("ixs = \(ixs)")

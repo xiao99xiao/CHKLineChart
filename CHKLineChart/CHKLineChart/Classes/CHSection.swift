@@ -347,14 +347,14 @@ extension CHSection {
             return
         }
         
-        if chartSelectedIndex == -1 || chartSelectedIndex > series.count {
+        if chartSelectedIndex == -1 {
             return       //没有数据返回
         }
         
         if self.paging {     //如果分页
             guard self.selectedIndex < self.series.count else{return}
             let series = self.series[self.selectedIndex]
-            if let attributes = self.getTitleAttributesByIndex(chartSelectedIndex, series: series) {
+            if chartSelectedIndex < series.chartModels.count, let attributes = self.getTitleAttributesByIndex(chartSelectedIndex, series: series) {
                 self.setHeader(titles: attributes)
             }
             
@@ -362,7 +362,7 @@ extension CHSection {
         } else {
             var titleAttr = [(title: String, color: UIColor)]()
             for serie in self.series {   //不分页
-                if let attributes = self.getTitleAttributesByIndex(chartSelectedIndex, series: serie) {
+                if chartSelectedIndex < serie.chartModels.count, let attributes = self.getTitleAttributesByIndex(chartSelectedIndex, series: serie) {
                     titleAttr.append(contentsOf: attributes)
                 }
                 

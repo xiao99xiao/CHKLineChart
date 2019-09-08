@@ -354,7 +354,7 @@ extension CHSection {
         if self.paging {     //如果分页
             guard self.selectedIndex < self.series.count else{return}
             let series = self.series[self.selectedIndex]
-            if chartSelectedIndex < series.chartModels.count, let attributes = self.getTitleAttributesByIndex(chartSelectedIndex, series: series) {
+            if let attributes = self.getTitleAttributesByIndex(chartSelectedIndex, series: series) {
                 self.setHeader(titles: attributes)
             }
             
@@ -362,7 +362,7 @@ extension CHSection {
         } else {
             var titleAttr = [(title: String, color: UIColor)]()
             for serie in self.series {   //不分页
-                if chartSelectedIndex < serie.chartModels.count, let attributes = self.getTitleAttributesByIndex(chartSelectedIndex, series: serie) {
+                if let attributes = self.getTitleAttributesByIndex(chartSelectedIndex, series: serie) {
                     titleAttr.append(contentsOf: attributes)
                 }
                 
@@ -481,6 +481,7 @@ extension CHSection {
         for model in series.chartModels {
             var title = ""
             var textColor: UIColor
+            guard chartSelectedIndex < model.datas.count else {continue}
             let item = model[chartSelectedIndex]
             switch model {
             case is CHCandleModel:

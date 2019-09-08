@@ -836,8 +836,8 @@ extension CHKLineChartView {
         self.scrollToPosition = .none
         
         //超出范围，选择最后一个元素选中
-        if self.selectedIndex < 0 || self.selectedIndex >= self.rangeTo {
-            self.selectedIndex = self.rangeTo - 1
+        if self.selectedIndex < 0 || self.selectedIndex >= self.rangeTo - self.rangeRightPadding {
+            self.selectedIndex = self.rangeTo - self.rangeRightPadding - 1
         }
         
         let backgroundLayer = CHShapeLayer()

@@ -1002,9 +1002,10 @@ extension CHKLineChartView {
             }
             
             //需要画x轴上的辅助线
-            if showXAxisReference {
-                referencePath.move(to: CGPoint(x: xPox + textSize.width / 2, y: section.frame.minY))
-                referencePath.addLine(to: CGPoint(x: xPox + textSize.width / 2, y: section.frame.maxY))
+            if showXAxisReference && xPox != 0.0 {
+                let x = xPox == endX - textSize.width ? endX : xPox + textSize.width / 2
+                referencePath.move(to: CGPoint(x: x, y: section.frame.minY))
+                referencePath.addLine(to: CGPoint(x: x, y: section.frame.maxY))
                 referenceLayer.path = referencePath.cgPath
                 xAxis.addSublayer(referenceLayer)
             }

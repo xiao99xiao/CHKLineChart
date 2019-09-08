@@ -247,7 +247,8 @@ open class CHCandleModel: CHChartModel {
         
         //循环起始到终结
         for i in stride(from: startIndex, to: endIndex, by: 1) {
-            
+
+            guard i < datas.count else {continue}
             if self.key != CHSeriesKey.candle {
                 //不是蜡烛柱类型，要读取具体的数值才绘制
                 if self[i].value == nil {       //读取的值
@@ -404,7 +405,8 @@ open class CHColumnModel: CHChartModel {
         
         //循环起始到终结
         for i in stride(from: startIndex, to: endIndex, by: 1) {
-            
+
+            guard i < datas.count else {continue}
             if self.key != CHSeriesKey.volume {
                 //不是蜡烛柱类型，要读取具体的数值才绘制
                 if self[i].value == nil {       //读取的值
@@ -414,8 +416,7 @@ open class CHColumnModel: CHChartModel {
             
             var isSolid = true
             let columnLayer = CAShapeLayer()
-            
-            guard i < datas.count else {continue}
+
             let item = datas[i]
             //开始X
             let ix = self.section.frame.origin.x + self.section.padding.left + CGFloat(i - startIndex) * plotWidth

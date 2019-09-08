@@ -97,7 +97,7 @@ extension CHSection {
         
         for i in stride(from: startIndex, to: endIndex, by: 1) {
             
-            
+            guard i < datas.count else {continue}
             let item = datas[i]
             
             switch model {
@@ -347,7 +347,7 @@ extension CHSection {
             return
         }
         
-        if chartSelectedIndex == -1 {
+        if chartSelectedIndex == -1 || chartSelectedIndex > series.count {
             return       //没有数据返回
         }
         

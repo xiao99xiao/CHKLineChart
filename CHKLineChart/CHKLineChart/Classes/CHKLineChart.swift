@@ -182,7 +182,8 @@ open class CHKLineChartView: UIView {
     open var selectedIndex: Int = -1                      //选择索引位
     open var scrollToPosition: CHChartViewScrollPosition = .none  //图表刷新后开始显示位置
     var selectedPoint: CGPoint = CGPoint.zero
-    
+    open var rangeRightPadding: Int = 10
+
     //是否可缩放
     open var enablePinch: Bool = true
     //是否可滑动
@@ -221,7 +222,7 @@ open class CHKLineChartView: UIView {
     var plotCount: Int = 0
     var rangeFrom: Int = 0                          //可见区域的开始索引位
     var rangeTo: Int = 0                            //可见区域的结束索引位
-    open var range: Int = 77                             //显示在可见区域的个数
+    open var range: Int = 66                             //显示在可见区域的个数
     var borderColor: UIColor = UIColor.gray
     open var labelSize = CGSize(width: 40, height: 16)
     
@@ -805,7 +806,7 @@ extension CHKLineChartView {
             //图表刷新滚动为默认时，如果第一次初始化，就默认滚动到最后显示
             if self.scrollToPosition == .none {
                 //如果图表尽头的索引为0，则进行初始化
-                if self.rangeTo == 0 || self.plotCount < self.rangeTo {
+                if self.rangeTo == 0 || self.plotCount + self.rangeRightPadding < self.rangeTo {
                     self.scrollToPosition = .end
                 }
             }
@@ -820,7 +821,7 @@ extension CHKLineChartView {
                 }
                 self.selectedIndex = -1
             } else if self.scrollToPosition == .end {
-                self.rangeTo = self.plotCount               //默认是数据最后一条为尽头
+                self.rangeTo = self.plotCount + self.rangeRightPadding               //默认是数据最后一条为尽头
                 if self.rangeTo - self.range > 0 {          //如果尽头 - 默认显示数大于0
                     self.rangeFrom = self.rangeTo - range   //计算开始的显示的位置
                 } else {
@@ -1558,15 +1559,15 @@ extension CHKLineChartView {
             } else {
                 //单指向左拖，往前查看数据
                 if self.plotCount > (self.rangeTo-self.rangeFrom) {
-                    if self.rangeTo + interval <= self.plotCount {
+                    if self.rangeTo + interval <= self.plotCount + rangeRightPadding {
                         self.rangeFrom += interval
                         self.rangeTo += interval
                         
                     } else {
-                        self.rangeFrom += self.plotCount - self.rangeTo
-                        self.rangeTo  = self.plotCount
-                        
-                        
+                        self.rangeFrom += self.plotCount + rangeRightPadding - self.rangeTo
+                        self.rangeTo  = self.plotCount + rangeRightPadding
+
+
                     }
                     self.drawLayerView()
                 }

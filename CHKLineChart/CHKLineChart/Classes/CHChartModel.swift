@@ -154,7 +154,7 @@ open class CHLineModel: CHChartModel {
         for i in stride(from: startIndex, to: endIndex, by: 1) {
             
             //开始的点
-            guard let value = self[i].value else {
+            guard i < self.datas.count, let value = self[i].value else {
                 continue //无法计算的值不绘画
             }
             
@@ -415,6 +415,7 @@ open class CHColumnModel: CHChartModel {
             var isSolid = true
             let columnLayer = CAShapeLayer()
             
+            guard i < datas.count else {continue}
             let item = datas[i]
             //开始X
             let ix = self.section.frame.origin.x + self.section.padding.left + CGFloat(i - startIndex) * plotWidth
@@ -494,6 +495,7 @@ open class CHBarModel: CHChartModel {
             //                continue  //无法计算的值不绘画
             //            }
             var isSolid = true
+            guard i < self.datas.count else {continue}
             let value = self[i].value           //读取的值
             if value == nil {
                 continue  //无法计算的值不绘画
@@ -516,8 +518,8 @@ open class CHBarModel: CHChartModel {
                 barLayer.strokeColor = self.downStyle.color.cgColor
                 barLayer.fillColor = self.downStyle.color.cgColor
             }
-            
-            if i < endIndex - 1, let newValue = self[i + 1].value {
+
+            if i < self.datas.count - 1, let newValue = self[i + 1].value {
                 if newValue >= value! {
                     isSolid = self.upStyle.isSolid
                 } else {
@@ -587,7 +589,7 @@ open class CHRoundModel: CHChartModel {
         for i in stride(from: startIndex, to: endIndex, by: 1) {
             
             //开始的点
-            guard let value = self[i].value else {
+            guard i < self.datas.count, let value = self[i].value else {
                 continue //无法计算的值不绘画
             }
             

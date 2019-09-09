@@ -167,6 +167,10 @@ open class CHKLineChartView: UIView {
     @IBInspectable open var labelFont = UIFont.systemFont(ofSize: 10) 
     @IBInspectable open var lineColor: UIColor = UIColor(white: 0.2, alpha: 1) //线条颜色
     @IBInspectable open var textColor: UIColor = UIColor(white: 0.8, alpha: 1) //文字颜色
+    @IBInspectable open var closeValueLabelFont = UIFont.systemFont(ofSize: 8)
+    @IBInspectable open var closeValueTextColor: UIColor = UIColor(white: 1, alpha: 1) //文字颜色
+    @IBInspectable open var closeValueBGColor: UIColor = UIColor(white: 0, alpha: 1) //文字颜色
+    @IBInspectable open var closeValueLineColor: UIColor = UIColor(white: 0.5, alpha: 1) //线条颜色
     @IBInspectable open var xAxisPerInterval: Int = 4                        //x轴的间断个数
     
     open var yAxisLabelWidth: CGFloat = 0                    //Y轴的宽度
@@ -183,6 +187,7 @@ open class CHKLineChartView: UIView {
     open var scrollToPosition: CHChartViewScrollPosition = .none  //图表刷新后开始显示位置
     var selectedPoint: CGPoint = CGPoint.zero
     open var rangeRightPadding: Int = 10
+    open var closeValueCornerRadius: CGFloat = 6
 
     //是否可缩放
     open var enablePinch: Bool = true
@@ -729,6 +734,10 @@ extension CHKLineChartView {
                 self.drawChart(section)
                 //绘制Y轴坐标上的标签
                 self.drawYAxisLabel(yAxisToDraw)
+
+                if section.valueType == .master, let closeLabel = calculateYAxisCloseValue(section) {
+                    drawYAxisCloseValueLabel(yLabelRect: closeLabel.0, strValue: closeLabel.1, drawBorder: closeLabel.2)
+                }
                 
                 //把标题添加到主绘图层上
                 self.drawLayer.addSublayer(section.titleLayer)
@@ -1272,7 +1281,117 @@ extension CHKLineChartView {
         
         return yAxisToDraw
     }
-    
+
+    /**
+     计算Y轴的最新价格标签
+
+     - parameter section: 分区
+     */
+    fileprivate func calculateYAxisCloseValue(_ section: CHSection) -> (CGRect, String, Bool)? {
+
+        var startX: CGFloat = 0
+
+        guard let datas = section.series.first(where: {$0.key == CHSeriesKey.candle})?.chartModels.last?.datas, let closeValue = datas.last?.closePrice else {return nil}
+        let index = datas.count - 1
+
+        //每个点的间隔宽度
+        let plotWidth = (section.frame.size.width - section.padding.left - section.padding.right) / CGFloat(range)
+
+        //分区中各个y轴虚线和y轴的label
+        //控制y轴的label在左还是右显示
+        switch self.showYAxisLabel {
+        case .left:
+            startX = section.frame.origin.x - 3 * (self.isInnerYAxis ? -1 : 1)
+        case .right:
+            startX = section.frame.maxX - self.yAxisLabelWidth + 3 * (self.isInnerYAxis ? -1 : 1)
+        case .none:
+            break
+        }
+
+        var iy = section.getLocalY(closeValue)
+        if iy > (section.frame.size.height - section.padding.bottom) {
+            iy = section.frame.size.height + section.padding.bottom - closeValueCornerRadius
+        } else if iy < section.padding.top {
+            iy = section.frame.origin.y + closeValueCornerRadius
+        }
+
+        //画虚线和Y标签值
+        guard let yLabel = delegate?.kLineChart(chart: self, labelOnYAxisForValue: closeValue, atIndex: index, section: section) else {return nil}
+        let labelSize = yLabel.ch_sizeWithConstrained(closeValueLabelFont)
+        let leftRangeDistance = index - rangeFrom
+        let itemRightX = CGFloat(leftRangeDistance + 1) * plotWidth + section.padding.left
+
+        let referencePath = UIBezierPath()
+        let referenceLayer = CHShapeLayer()
+        referenceLayer.lineWidth = self.lineWidth
+        referenceLayer.strokeColor = self.closeValueLineColor.cgColor
+        referenceLayer.lineDashPattern = [3]
+
+        var labelX: CGFloat = 0.0
+        var drawLabelBorder = false
+        if itemRightX > startX {
+            //辅助线从屏幕最左端画起
+            referencePath.move(to: CGPoint(x: section.frame.origin.x + section.padding.left, y: iy))
+            referencePath.addLine(to: CGPoint(x: section.frame.origin.x + section.frame.size.width - section.padding.right, y: iy))
+
+            labelX = startX - labelSize.width - closeValueCornerRadius
+            drawLabelBorder = true
+        } else {
+            //辅助线从柱子右侧开始画起
+            referencePath.move(to: CGPoint(x: itemRightX, y: iy))
+            referencePath.addLine(to: CGPoint(x: startX, y: iy))
+
+            labelX = startX
+        }
+        referenceLayer.path = referencePath.cgPath
+        self.drawLayer.addSublayer(referenceLayer)
+
+        let yLabelRect = CGRect(x: labelX,
+                                y: iy - closeValueCornerRadius,
+                                width: drawLabelBorder ? labelSize.width + closeValueCornerRadius : labelSize.width,
+                                height: drawLabelBorder ? closeValueCornerRadius * 2 : labelSize.height
+        )
+
+        return (yLabelRect, yLabel, drawLabelBorder)
+    }
+
+    /// 绘制y轴坐标上的最新价格标签
+    ///
+    /// - Parameter
+    ///     - yLabelRect: 标签位置
+    ///     - strValue: 标签内容
+    fileprivate func drawYAxisCloseValueLabel(yLabelRect: CGRect, strValue: String, drawBorder: Bool) {
+
+        var alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.left)
+        //分区中各个y轴虚线和y轴的label
+        //控制y轴的label在左还是右显示
+        switch self.showYAxisLabel {
+        case .left:
+            alignmentMode = self.isInnerYAxis ? convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.left) : convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.right)
+        case .right:
+            alignmentMode = self.isInnerYAxis ? convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.right) : convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.left)
+        case .none:
+            alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.left)
+        }
+
+        let yAxisLabel = CHTextLayer()
+        yAxisLabel.frame = yLabelRect
+        yAxisLabel.string = strValue
+        yAxisLabel.fontSize = self.closeValueLabelFont.pointSize
+        yAxisLabel.foregroundColor =  self.closeValueTextColor.cgColor
+        yAxisLabel.backgroundColor = self.closeValueBGColor.cgColor
+        yAxisLabel.alignmentMode = convertToCATextLayerAlignmentMode(alignmentMode)
+        yAxisLabel.contentsScale = UIScreen.main.scale
+        if drawBorder {
+            yAxisLabel.cornerRadius = yLabelRect.height / 2
+            yAxisLabel.borderColor = self.closeValueTextColor.cgColor
+            yAxisLabel.alignmentMode = CATextLayerAlignmentMode.center
+        }
+
+        self.drawLayer.addSublayer(yAxisLabel)
+
+        //NSString(string: strValue).draw(in: yLabelRect, withAttributes: fontAttributes)
+    }
     
     /// 绘制y轴坐标上的标签
     ///

@@ -1294,6 +1294,10 @@ extension CHKLineChartView {
         guard let datas = section.series.first(where: {$0.key == CHSeriesKey.candle})?.chartModels.last?.datas, let closeValue = datas.last?.closePrice else {return nil}
         let index = datas.count - 1
 
+        //画虚线和Y标签值
+        guard let yLabel = delegate?.kLineChart(chart: self, labelOnYAxisForValue: closeValue, atIndex: index, section: section) else {return nil}
+        let labelSize = yLabel.ch_sizeWithConstrained(closeValueLabelFont)
+
         //每个点的间隔宽度
         let plotWidth = (section.frame.size.width - section.padding.left - section.padding.right) / CGFloat(range)
 
@@ -1303,7 +1307,7 @@ extension CHKLineChartView {
         case .left:
             startX = section.frame.origin.x - 3 * (self.isInnerYAxis ? -1 : 1)
         case .right:
-            startX = section.frame.maxX - self.yAxisLabelWidth + 3 * (self.isInnerYAxis ? -1 : 1)
+            startX = section.frame.maxX - labelSize.width + 3 * (self.isInnerYAxis ? -1 : 1)
         case .none:
             break
         }
@@ -1315,9 +1319,6 @@ extension CHKLineChartView {
             iy = section.frame.origin.y + section.padding.top - closeValueCornerRadius
         }
 
-        //画虚线和Y标签值
-        guard let yLabel = delegate?.kLineChart(chart: self, labelOnYAxisForValue: closeValue, atIndex: index, section: section) else {return nil}
-        let labelSize = yLabel.ch_sizeWithConstrained(closeValueLabelFont)
         let leftRangeDistance = index - rangeFrom
         let itemRightX = CGFloat(leftRangeDistance + 1) * plotWidth + section.padding.left
 
@@ -1325,7 +1326,7 @@ extension CHKLineChartView {
         let referenceLayer = CHShapeLayer()
         referenceLayer.lineWidth = self.lineWidth
         referenceLayer.strokeColor = self.closeValueLineColor.cgColor
-        referenceLayer.lineDashPattern = [3]
+        referenceLayer.lineDashPattern = [10]
 
         var labelX: CGFloat = 0.0
         var drawLabelBorder = false

@@ -1385,6 +1385,7 @@ extension CHKLineChartView {
         if drawBorder {
             yAxisLabel.cornerRadius = yLabelRect.height / 2
             yAxisLabel.borderColor = self.closeValueTextColor.cgColor
+            yAxisLabel.borderWidth = self.lineWidth
             yAxisLabel.alignmentMode = CATextLayerAlignmentMode.center
         }
 

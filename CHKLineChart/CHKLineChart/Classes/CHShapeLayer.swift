@@ -24,6 +24,9 @@ open class CHTextLayer: CATextLayer {
         return nil
     }
 
+}
+
+open class CHSingleLineTextLayer: CHTextLayer {
     // REF: http://lists.apple.com/archives/quartz-dev/2008/Aug/msg00016.html
     // CREDIT: David Hoerl - https://github.com/dhoerl
     // USAGE: To fix the vertical alignment issue that currently exists within the CATextLayer class. Change made to the yDiff calculation.

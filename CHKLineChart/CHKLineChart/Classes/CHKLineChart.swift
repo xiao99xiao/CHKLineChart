@@ -1374,7 +1374,7 @@ extension CHKLineChartView {
             alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.left)
         }
 
-        let yAxisLabel = CHTextLayer()
+        let yAxisLabel = CHSingleLineTextLayer()
         yAxisLabel.frame = yLabelRect
         yAxisLabel.string = strValue
         yAxisLabel.fontSize = self.closeValueLabelFont.pointSize

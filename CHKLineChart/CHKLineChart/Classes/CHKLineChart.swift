@@ -982,27 +982,27 @@ extension CHKLineChartView {
             
             //记录待绘制的文本
             xAxisToDraw.append((barLabelRect, xLabel))
-            
-            //绘制辅助线
-            let referencePath = UIBezierPath()
-            let referenceLayer = CHShapeLayer()
-            referenceLayer.lineWidth = self.lineWidth
-            
-            //处理辅助线样式
-            switch section.xAxis.referenceStyle {
-            case let .dash(color: dashColor, pattern: pattern):
-                referenceLayer.strokeColor = dashColor.cgColor
-                referenceLayer.lineDashPattern = pattern
-                showXAxisReference = true
-            case let .solid(color: solidColor):
-                referenceLayer.strokeColor = solidColor.cgColor
-                showXAxisReference = true
-            default:
-                showXAxisReference = false
-            }
-            
+
             //需要画x轴上的辅助线
             if showXAxisReference && xPox != 0.0 {
+                //绘制辅助线
+                let referencePath = UIBezierPath()
+                let referenceLayer = CHShapeLayer()
+                referenceLayer.lineWidth = self.lineWidth
+
+                //处理辅助线样式
+                switch section.xAxis.referenceStyle {
+                case let .dash(color: dashColor, pattern: pattern):
+                    referenceLayer.strokeColor = dashColor.cgColor
+                    referenceLayer.lineDashPattern = pattern
+                    showXAxisReference = true
+                case let .solid(color: solidColor):
+                    referenceLayer.strokeColor = solidColor.cgColor
+                    showXAxisReference = true
+                default:
+                    showXAxisReference = false
+                }
+
                 let x = xPox == endX - textSize.width ? endX : xPox + textSize.width / 2
                 referencePath.move(to: CGPoint(x: x, y: section.frame.minY))
                 referencePath.addLine(to: CGPoint(x: x, y: section.frame.maxY))

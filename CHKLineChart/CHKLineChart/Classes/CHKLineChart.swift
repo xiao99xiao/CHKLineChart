@@ -1310,9 +1310,9 @@ extension CHKLineChartView {
 
         var iy = section.getLocalY(closeValue)
         if iy > (section.frame.size.height - section.padding.bottom) {
-            iy = section.frame.size.height + section.padding.bottom - closeValueCornerRadius
+            iy = section.frame.size.height - closeValueCornerRadius
         } else if iy < section.padding.top {
-            iy = section.frame.origin.y + closeValueCornerRadius
+            iy = section.frame.origin.y + section.padding.top - closeValueCornerRadius
         }
 
         //画虚线和Y标签值

@@ -237,6 +237,7 @@ open class CHKLineChartView: UIView {
     open var selectedTextColor: UIColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1) //选中点的显示的文字颜色
     var verticalLineView: UIView?
     var horizontalLineView: UIView?
+    var horizontalLineGradientLayer: CAGradientLayer?
     var selectedXAxisLabel: UILabel?
     var selectedYAxisLabel: UILabel?
     var sightView: UIView?       //点击出现的准星
@@ -322,8 +323,13 @@ open class CHKLineChartView: UIView {
         self.isMultipleTouchEnabled = true
         
         //初始化点击选择的辅助线显示
-        self.verticalLineView = UIView(frame: CGRect(x: 0, y: 0, width: lineWidth, height: 0))
-        self.verticalLineView?.backgroundColor = self.selectedBGColor
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: lineWidth, height: 0))
+//        self.verticalLineView?.backgroundColor = self.selectedBGColor
+        let gradient = CAGradientLayer()
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.clear.cgColor, self.selectedBGColor.withAlphaComponent(0.3).cgColor, UIColor.clear.cgColor]
+        view.layer.insertSublayer(gradient, at: 0)
+        self.verticalLineView = view
         self.verticalLineView?.isHidden = true
         self.addSubview(self.verticalLineView!)
         
@@ -517,8 +523,8 @@ open class CHKLineChartView: UIView {
         self.selectedXAxisLabel?.textColor = self.selectedTextColor
 
         //重置辅助线和准心颜色
-        self.verticalLineView?.backgroundColor = self.selectedBGColor
-        self.horizontalLineView?.backgroundColor = self.selectedBGColor
+//        self.verticalLineView?.backgroundColor = self.selectedBGColor
+//        self.horizontalLineView?.backgroundColor = self.selectedBGColor
         self.sightView?.backgroundColor = self.selectedBGColor
         
         let yaxis = section!.yAxis
@@ -547,7 +553,14 @@ open class CHKLineChartView: UIView {
                 //显示辅助线
                 self.horizontalLineView?.frame = CGRect(x: hx, y: hy, width: self.lineWidth, height: hheight)
                 //                self.horizontalLineView?.isHidden = false
-                
+                let gradient = CAGradientLayer()
+                gradient.frame = CGRect(x: 0, y: 0, width: plotWidth, height: hheight)
+                gradient.colors = [UIColor.clear.cgColor, self.selectedBGColor.withAlphaComponent(0.5).cgColor, UIColor.clear.cgColor]
+                if let oldLayer = horizontalLineGradientLayer {
+                    self.horizontalLineView?.layer.replaceSublayer(oldLayer, with: gradient)
+                } else {
+                    self.horizontalLineView?.layer.insertSublayer(gradient, at: 0)
+                }
                 let vx = section!.frame.origin.x + section!.padding.left
                 var vy: CGFloat = 0
                 

@@ -1388,6 +1388,7 @@ extension CHKLineChartView {
         let yAxisLabel = CHSingleLineTextLayer()
         yAxisLabel.frame = yLabelRect
         yAxisLabel.string = strValue
+        yAxisLabel.font = self.closeValueLabelFont
         yAxisLabel.fontSize = self.closeValueLabelFont.pointSize
         yAxisLabel.foregroundColor =  self.closeValueTextColor.cgColor
         yAxisLabel.backgroundColor = self.closeValueBGColor.cgColor

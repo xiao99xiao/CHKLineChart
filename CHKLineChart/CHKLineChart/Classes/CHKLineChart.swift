@@ -1012,7 +1012,7 @@ extension CHKLineChartView {
             }
 
             //需要画x轴上的辅助线
-            if showXAxisReference && xPox != 0.0 {
+            if showXAxisReference && xPox != 0.0 && i != self.rangeTo {
                 //绘制辅助线
                 let referencePath = UIBezierPath()
                 let referenceLayer = CHShapeLayer()

@@ -1374,16 +1374,16 @@ extension CHKLineChartView {
     ///     - strValue: 标签内容
     fileprivate func drawYAxisCloseValueLabel(yLabelRect: CGRect, strValue: String, drawBorder: Bool) {
 
-        var alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.left)
+        var alignmentMode = CATextLayerAlignmentMode.left
         //分区中各个y轴虚线和y轴的label
         //控制y轴的label在左还是右显示
         switch self.showYAxisLabel {
         case .left:
-            alignmentMode = self.isInnerYAxis ? convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.left) : convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.right)
+            alignmentMode = self.isInnerYAxis ? CATextLayerAlignmentMode.left : CATextLayerAlignmentMode.right
         case .right:
-            alignmentMode = self.isInnerYAxis ? convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.right) : convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.left)
+            alignmentMode = self.isInnerYAxis ? CATextLayerAlignmentMode.right : CATextLayerAlignmentMode.left
         case .none:
-            alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.left)
+            alignmentMode = CATextLayerAlignmentMode.left
         }
 
         let yAxisLabel = CHSingleLineTextLayer()
@@ -1393,7 +1393,7 @@ extension CHKLineChartView {
         yAxisLabel.fontSize = self.closeValueLabelFont.pointSize
         yAxisLabel.foregroundColor =  self.closeValueTextColor.cgColor
         yAxisLabel.backgroundColor = self.closeValueBGColor.cgColor
-        yAxisLabel.alignmentMode = convertToCATextLayerAlignmentMode(alignmentMode)
+        yAxisLabel.alignmentMode = alignmentMode
         yAxisLabel.contentsScale = UIScreen.main.scale
         if drawBorder {
             yAxisLabel.cornerRadius = yLabelRect.height / 2
@@ -1412,16 +1412,16 @@ extension CHKLineChartView {
     /// - Parameter yAxisToDraw:
     fileprivate func drawYAxisLabel(_ yAxisToDraw: [(CGRect, String)]) {
         
-        var alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.left)
+        var alignmentMode = CATextLayerAlignmentMode.left
         //分区中各个y轴虚线和y轴的label
         //控制y轴的label在左还是右显示
         switch self.showYAxisLabel {
         case .left:
-            alignmentMode = self.isInnerYAxis ? convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.left) : convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.right)
+            alignmentMode = self.isInnerYAxis ? CATextLayerAlignmentMode.left : CATextLayerAlignmentMode.right
         case .right:
-            alignmentMode = self.isInnerYAxis ? convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.right) : convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.left)
+            alignmentMode = self.isInnerYAxis ? CATextLayerAlignmentMode.right : CATextLayerAlignmentMode.left
         case .none:
-            alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.left)
+            alignmentMode = CATextLayerAlignmentMode.left
         }
         
         for (yLabelRect, strValue) in yAxisToDraw {
@@ -1433,7 +1433,7 @@ extension CHKLineChartView {
             yAxisLabel.fontSize = self.labelFont.pointSize
             yAxisLabel.foregroundColor =  self.textColor.cgColor
             yAxisLabel.backgroundColor = UIColor.clear.cgColor
-            yAxisLabel.alignmentMode = convertToCATextLayerAlignmentMode(alignmentMode)
+            yAxisLabel.alignmentMode = alignmentMode
             yAxisLabel.contentsScale = UIScreen.main.scale
             
             self.drawLayer.addSublayer(yAxisLabel)
@@ -2010,14 +2010,4 @@ extension CHKLineChartView: UIGestureRecognizerDelegate {
 //            self.drawLayerView()
         }
     }
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromCATextLayerAlignmentMode(_ input: CATextLayerAlignmentMode) -> String {
-	return input.rawValue
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToCATextLayerAlignmentMode(_ input: String) -> CATextLayerAlignmentMode {
-	return CATextLayerAlignmentMode(rawValue: input)
 }

@@ -170,7 +170,6 @@ open class CHKLineChartView: UIView {
     @IBInspectable open var closeValueLabelFont = UIFont.systemFont(ofSize: 8)
     @IBInspectable open var closeValueTextColor: UIColor = UIColor(white: 1, alpha: 1) //文字颜色
     @IBInspectable open var closeValueBGColor: UIColor = UIColor(white: 0, alpha: 1) //文字颜色
-    @IBInspectable open var closeValueLineColor: UIColor = UIColor(white: 0.5, alpha: 1) //线条颜色
     @IBInspectable open var xAxisPerInterval: Int = 4                        //x轴的间断个数
     
     open var yAxisLabelWidth: CGFloat = 0                    //Y轴的宽度
@@ -188,6 +187,7 @@ open class CHKLineChartView: UIView {
     var selectedPoint: CGPoint = CGPoint.zero
     open var rangeRightPadding: Int = 10
     open var closeValueCornerRadius: CGFloat = 6
+    open var closeValueReferenceStyle: CHAxisReferenceStyle = .dash(color: UIColor(white: 0.5, alpha: 1), pattern: [5])
 
     //是否可缩放
     open var enablePinch: Bool = true
@@ -1325,8 +1325,18 @@ extension CHKLineChartView {
         let referencePath = UIBezierPath()
         let referenceLayer = CHShapeLayer()
         referenceLayer.lineWidth = self.lineWidth
-        referenceLayer.strokeColor = self.closeValueLineColor.cgColor
-        referenceLayer.lineDashPattern = [7]
+
+        //处理辅助线样式
+
+        switch closeValueReferenceStyle {
+        case let .dash(color: dashColor, pattern: pattern):
+            referenceLayer.strokeColor = dashColor.cgColor
+            referenceLayer.lineDashPattern = pattern
+        case let .solid(color: solidColor):
+            referenceLayer.strokeColor = solidColor.cgColor
+        default:
+            break
+        }
 
         var labelX: CGFloat = 0.0
         var drawLabelBorder = false
@@ -1499,7 +1509,7 @@ extension CHKLineChartView {
             }
             self.drawLayerView()
         } else if let plotCount = self.delegate?.numberOfPointsInKLineChart(chart: self), plotCount > 0 {
-            if self.rangeTo == self.plotCount {
+            if self.rangeTo - self.rangeRightPadding == self.plotCount {
                 reloadData(toPosition: CHChartViewScrollPosition.end, resetData: true)
             } else {
                 reloadData(toPosition: CHChartViewScrollPosition.none, resetData: true)

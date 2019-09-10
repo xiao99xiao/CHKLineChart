@@ -323,13 +323,8 @@ open class CHKLineChartView: UIView {
         self.isMultipleTouchEnabled = true
         
         //初始化点击选择的辅助线显示
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: lineWidth, height: 0))
-//        self.verticalLineView?.backgroundColor = self.selectedBGColor
-        let gradient = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor.clear.cgColor, self.selectedBGColor.withAlphaComponent(0.3).cgColor, UIColor.clear.cgColor]
-        view.layer.insertSublayer(gradient, at: 0)
-        self.verticalLineView = view
+        self.verticalLineView = UIView(frame: CGRect(x: 0, y: 0, width: lineWidth, height: 0))
+        self.verticalLineView?.backgroundColor = self.selectedBGColor
         self.verticalLineView?.isHidden = true
         self.addSubview(self.verticalLineView!)
         
@@ -558,8 +553,8 @@ open class CHKLineChartView: UIView {
                     self.horizontalLineView?.layer.replaceSublayer(oldLayer, with: gradient)
                 } else {
                     self.horizontalLineView?.layer.insertSublayer(gradient, at: 0)
-                    horizontalLineGradientLayer = gradient
                 }
+                horizontalLineGradientLayer = gradient
                 let vx = section!.frame.origin.x + section!.padding.left
                 var vy: CGFloat = 0
                 
@@ -687,6 +682,8 @@ open class CHKLineChartView: UIView {
         self.selectedPoint = CGPoint.zero
         self.verticalLineView?.isHidden = true
         self.horizontalLineView?.isHidden = true
+        self.horizontalLineGradientLayer?.removeFromSuperlayer()
+        self.horizontalLineGradientLayer = nil
         self.selectedYAxisLabel?.isHidden = true
         self.selectedXAxisLabel?.isHidden = true
         self.sightView?.isHidden = true

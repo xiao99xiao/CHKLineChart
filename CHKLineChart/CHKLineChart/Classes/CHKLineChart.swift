@@ -353,10 +353,10 @@ open class CHKLineChartView: UIView {
         self.selectedXAxisLabel?.textAlignment = NSTextAlignment.center
         self.addSubview(self.selectedXAxisLabel!)
         
-        self.sightView = UIView(frame: CGRect(x: 0, y: 0, width: 6, height: 6))
+        self.sightView = UIView(frame: CGRect(x: 0, y: 0, width: 4, height: 4))
         self.sightView?.backgroundColor = self.selectedBGColor
         self.sightView?.isHidden = true
-        self.sightView?.layer.cornerRadius = 3
+        self.sightView?.layer.cornerRadius = 2
         self.addSubview(self.sightView!)
         
         //绘画图层

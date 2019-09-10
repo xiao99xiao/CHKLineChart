@@ -334,7 +334,6 @@ open class CHKLineChartView: UIView {
         self.addSubview(self.verticalLineView!)
         
         self.horizontalLineView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: lineWidth))
-        self.horizontalLineView?.backgroundColor = self.selectedBGColor
         self.horizontalLineView?.isHidden = true
         self.addSubview(self.horizontalLineView!)
         
@@ -524,7 +523,6 @@ open class CHKLineChartView: UIView {
 
         //重置辅助线和准心颜色
 //        self.verticalLineView?.backgroundColor = self.selectedBGColor
-//        self.horizontalLineView?.backgroundColor = self.selectedBGColor
         self.sightView?.backgroundColor = self.selectedBGColor
         
         let yaxis = section!.yAxis
@@ -547,19 +545,20 @@ open class CHKLineChartView: UIView {
                 self.selectedIndex = i
                 let item = self.datas[i]
                 var hx = section!.frame.origin.x + section!.padding.left
-                hx = hx + plotWidth * CGFloat(i - self.rangeFrom) + plotWidth / 2
+                hx = hx + plotWidth * CGFloat(i - self.rangeFrom)
                 let hy = self.padding.top
                 let hheight = lastSection.frame.maxY
                 //显示辅助线
-                self.horizontalLineView?.frame = CGRect(x: hx, y: hy, width: self.lineWidth, height: hheight)
+                self.horizontalLineView?.frame = CGRect(x: hx, y: hy, width: plotWidth, height: hheight)
                 //                self.horizontalLineView?.isHidden = false
                 let gradient = CAGradientLayer()
                 gradient.frame = CGRect(x: 0, y: 0, width: plotWidth, height: hheight)
-                gradient.colors = [UIColor.clear.cgColor, self.selectedBGColor.withAlphaComponent(0.5).cgColor, UIColor.clear.cgColor]
+                gradient.colors = [self.selectedBGColor.withAlphaComponent(0).cgColor, self.selectedBGColor.withAlphaComponent(0.5).cgColor,self.selectedBGColor.withAlphaComponent(0.5).cgColor,self.selectedBGColor.withAlphaComponent(0.5).cgColor,self.selectedBGColor.withAlphaComponent(0.5).cgColor,self.selectedBGColor.withAlphaComponent(0.5).cgColor, self.selectedBGColor.withAlphaComponent(0).cgColor]
                 if let oldLayer = horizontalLineGradientLayer {
                     self.horizontalLineView?.layer.replaceSublayer(oldLayer, with: gradient)
                 } else {
                     self.horizontalLineView?.layer.insertSublayer(gradient, at: 0)
+                    horizontalLineGradientLayer = gradient
                 }
                 let vx = section!.frame.origin.x + section!.padding.left
                 var vy: CGFloat = 0

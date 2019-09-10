@@ -1368,7 +1368,7 @@ extension CHKLineChartView {
 
         let yLabelRect = CGRect(x: labelX,
                                 y: iy - closeValueCornerRadius,
-                                width: drawLabelBorder ? labelSize.width + closeValueCornerRadius : labelSize.width,
+                                width: drawLabelBorder ? labelSize.width + closeValueCornerRadius : yAxisLabelWidth,
                                 height: drawLabelBorder ? closeValueCornerRadius * 2 : labelSize.height
         )
 

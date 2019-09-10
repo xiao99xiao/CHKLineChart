@@ -181,6 +181,7 @@ extension CHSection {
         let titleText = CHTextLayer()
         titleText.frame = CGRect(origin: point, size: CGSize(width: containerWidth, height: textSize.height + 20))
         titleText.string = title
+        titleText.font = self.labelFont
         titleText.fontSize = self.labelFont.pointSize
         //        titleText.foregroundColor =  self.titleColor.cgColor
         titleText.backgroundColor = UIColor.clear.cgColor

@@ -1058,6 +1058,7 @@ extension CHKLineChartView {
             xLabelText.frame = barLabelRect
             xLabelText.string = xLabel
             xLabelText.alignmentMode = CATextLayerAlignmentMode.center
+            xLabelText.font = self.labelFont
             xLabelText.fontSize = self.labelFont.pointSize
             xLabelText.foregroundColor =  self.textColor.cgColor
             xLabelText.backgroundColor = UIColor.clear.cgColor
@@ -1428,6 +1429,7 @@ extension CHKLineChartView {
             let yAxisLabel = CHTextLayer()
             yAxisLabel.frame = yLabelRect
             yAxisLabel.string = strValue
+            yAxisLabel.font = self.labelFont
             yAxisLabel.fontSize = self.labelFont.pointSize
             yAxisLabel.foregroundColor =  self.textColor.cgColor
             yAxisLabel.backgroundColor = UIColor.clear.cgColor

@@ -223,7 +223,7 @@ open class CHKLineChartView: UIView {
     /// 显示边线上左下有
     open var borderWidth: (top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) = (0.25, 0.25, 0.25, 0.25)
     
-    var lineWidth: CGFloat = 0.5
+    var lineWidth: CGFloat = 1.0 / UIScreen.main.scale
     var plotCount: Int = 0
     var rangeFrom: Int = 0                          //可见区域的开始索引位
     var rangeTo: Int = 0                            //可见区域的结束索引位

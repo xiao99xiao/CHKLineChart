@@ -1316,7 +1316,7 @@ extension CHKLineChartView {
         case .left:
             startX = section.frame.origin.x - 3 * (self.isInnerYAxis ? -1 : 1)
         case .right:
-            startX = section.frame.width - self.yAxisLabelWidth + 3 * (self.isInnerYAxis ? -1 : 1)
+            startX = section.frame.maxX - self.yAxisLabelWidth + 3 * (self.isInnerYAxis ? -1 : 1)
         case .none:
             break
         }

@@ -1307,7 +1307,7 @@ extension CHKLineChartView {
         case .left:
             startX = section.frame.origin.x - 3 * (self.isInnerYAxis ? -1 : 1)
         case .right:
-            startX = section.frame.maxX - labelSize.width + 3 * (self.isInnerYAxis ? -1 : 1)
+            startX = section.frame.width - self.yAxisLabelWidth + 3 * (self.isInnerYAxis ? -1 : 1)
         case .none:
             break
         }
@@ -1326,7 +1326,7 @@ extension CHKLineChartView {
         let referenceLayer = CHShapeLayer()
         referenceLayer.lineWidth = self.lineWidth
         referenceLayer.strokeColor = self.closeValueLineColor.cgColor
-        referenceLayer.lineDashPattern = [10]
+        referenceLayer.lineDashPattern = [7]
 
         var labelX: CGFloat = 0.0
         var drawLabelBorder = false

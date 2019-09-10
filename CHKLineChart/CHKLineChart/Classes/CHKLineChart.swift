@@ -548,7 +548,7 @@ open class CHKLineChartView: UIView {
                 //                self.horizontalLineView?.isHidden = false
                 let gradient = CAGradientLayer()
                 gradient.frame = CGRect(x: 0, y: 0, width: plotWidth, height: hheight)
-                gradient.colors = [self.selectedBGColor.withAlphaComponent(0).cgColor, self.selectedBGColor.withAlphaComponent(0.3).cgColor,self.selectedBGColor.withAlphaComponent(0.3).cgColor,self.selectedBGColor.withAlphaComponent(0.3).cgColor,self.selectedBGColor.withAlphaComponent(0.3).cgColor,self.selectedBGColor.withAlphaComponent(0.3).cgColor, self.selectedBGColor.withAlphaComponent(0).cgColor]
+                gradient.colors = [self.selectedBGColor.withAlphaComponent(0).cgColor, self.selectedBGColor.withAlphaComponent(0.2).cgColor,self.selectedBGColor.withAlphaComponent(0.2).cgColor,self.selectedBGColor.withAlphaComponent(0.2).cgColor,self.selectedBGColor.withAlphaComponent(0.2).cgColor,self.selectedBGColor.withAlphaComponent(0.2).cgColor, self.selectedBGColor.withAlphaComponent(0).cgColor]
                 if let oldLayer = horizontalLineGradientLayer, self.horizontalLineView?.layer.sublayers?.contains(oldLayer) ?? false {
                     self.horizontalLineView?.layer.replaceSublayer(oldLayer, with: gradient)
                 } else {

@@ -545,16 +545,16 @@ open class CHKLineChartView: UIView {
                 self.selectedIndex = i
                 let item = self.datas[i]
                 var hx = section!.frame.origin.x + section!.padding.left
-                hx = hx + plotWidth * CGFloat(i - self.rangeFrom)
+                hx = hx + plotWidth * CGFloat(i - self.rangeFrom) + plotWidth / 2
                 let hy = self.padding.top
                 let hheight = lastSection.frame.maxY
                 //显示辅助线
-                self.horizontalLineView?.frame = CGRect(x: hx, y: hy, width: plotWidth, height: hheight)
+                self.horizontalLineView?.frame = CGRect(x: hx - plotWidth / 2, y: hy, width: plotWidth, height: hheight)
                 //                self.horizontalLineView?.isHidden = false
                 let gradient = CAGradientLayer()
                 gradient.frame = CGRect(x: 0, y: 0, width: plotWidth, height: hheight)
                 gradient.colors = [self.selectedBGColor.withAlphaComponent(0).cgColor, self.selectedBGColor.withAlphaComponent(0.5).cgColor,self.selectedBGColor.withAlphaComponent(0.5).cgColor,self.selectedBGColor.withAlphaComponent(0.5).cgColor,self.selectedBGColor.withAlphaComponent(0.5).cgColor,self.selectedBGColor.withAlphaComponent(0.5).cgColor, self.selectedBGColor.withAlphaComponent(0).cgColor]
-                if let oldLayer = horizontalLineGradientLayer {
+                if let oldLayer = horizontalLineGradientLayer, self.horizontalLineView?.layer.sublayers?.contains(oldLayer) ?? false {
                     self.horizontalLineView?.layer.replaceSublayer(oldLayer, with: gradient)
                 } else {
                     self.horizontalLineView?.layer.insertSublayer(gradient, at: 0)

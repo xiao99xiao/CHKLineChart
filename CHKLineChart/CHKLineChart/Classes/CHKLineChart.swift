@@ -992,6 +992,16 @@ extension CHKLineChartView {
             //记录待绘制的文本
             xAxisToDraw.append((barLabelRect, xLabel))
 
+            //处理辅助线样式
+            switch section.xAxis.referenceStyle {
+            case .dash(color: _, pattern: _):
+                showXAxisReference = true
+            case .solid(color: _):
+                showXAxisReference = true
+            default:
+                showXAxisReference = false
+            }
+
             //需要画x轴上的辅助线
             if showXAxisReference && xPox != 0.0 {
                 //绘制辅助线
@@ -1004,12 +1014,10 @@ extension CHKLineChartView {
                 case let .dash(color: dashColor, pattern: pattern):
                     referenceLayer.strokeColor = dashColor.cgColor
                     referenceLayer.lineDashPattern = pattern
-                    showXAxisReference = true
                 case let .solid(color: solidColor):
                     referenceLayer.strokeColor = solidColor.cgColor
-                    showXAxisReference = true
                 default:
-                    showXAxisReference = false
+                    break
                 }
 
                 let x = xPox == endX - textSize.width ? endX : xPox + textSize.width / 2

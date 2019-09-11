@@ -12,8 +12,8 @@ Pod::Spec.new do |s|
 
   s.license      = "MIT"
   s.author       = { "Chance" => "zhiquan911@qq.com" }
-  s.platform     = :ios, "8.0"
-  s.ios.deployment_target = '8.0'
+  s.platform     = :ios, "10.0"
+  s.ios.deployment_target = '10.0'
   s.source       = { :git => "https://github.com/zhiquan911/CHKLineChart.git", :tag => s.version}
   s.source_files = "CHKLineChart/CHKLineChart/Classes/*.{swift,h,m}"
   s.requires_arc = true

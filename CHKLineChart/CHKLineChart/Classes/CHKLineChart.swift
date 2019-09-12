@@ -189,6 +189,8 @@ open class CHKLineChartView: UIView {
     open var closeValueCornerRadius: CGFloat = 6
     open var closeValueReferenceStyle: CHAxisReferenceStyle = .dash(color: UIColor(white: 0.5, alpha: 1), pattern: [5])
 
+    open var fullscreenButton: UIButton?
+
     //是否可缩放
     open var enablePinch: Bool = true
     //是否可滑动
@@ -772,6 +774,12 @@ extension CHKLineChartView {
 
                 if section.valueType == .master, let closeLabel = calculateYAxisCloseValue(section) {
                     drawYAxisCloseValueLabel(yLabelRect: closeLabel.0, strValue: closeLabel.1, drawBorder: closeLabel.2)
+                    if let button = fullscreenButton {
+                        if !subviews.contains(button) {
+                            addSubview(button)
+                        }
+                        button.frame = CGRect(origin: CGPoint(x: section.frame.minX + 8, y: section.frame.maxY - 8), size: button.frame.size)
+                    }
                 }
                 
                 //把标题添加到主绘图层上

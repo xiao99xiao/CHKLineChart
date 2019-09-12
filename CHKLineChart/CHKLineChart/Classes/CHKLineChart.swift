@@ -778,7 +778,7 @@ extension CHKLineChartView {
                         if !subviews.contains(button) {
                             addSubview(button)
                         }
-                        button.frame = CGRect(origin: CGPoint(x: section.frame.minX + 8, y: section.frame.maxY - 8), size: button.frame.size)
+                        button.frame = CGRect(origin: CGPoint(x: section.frame.minX + 8, y: section.frame.maxY - 8 - button.frame.size.height ), size: button.frame.size)
                     }
                 }
                 

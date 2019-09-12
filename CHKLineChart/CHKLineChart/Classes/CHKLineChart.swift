@@ -208,6 +208,7 @@ open class CHKLineChartView: UIView {
             self.verticalLineView?.isHidden = !self.showSelection
             self.horizontalLineView?.isHidden = !self.showSelection
             self.sightView?.isHidden = !self.showSelection
+            self.selectedPanel?.isHidden = !self.showSelection
         }
     }
     
@@ -241,6 +242,7 @@ open class CHKLineChartView: UIView {
     var selectedXAxisLabel: UILabel?
     var selectedYAxisLabel: UILabel?
     var sightView: UIView?       //点击出现的准星
+    open var selectedPanel: CHFloatPanel? // 选中点时显示的浮框
     
     //动力学引擎
     lazy var animator: UIDynamicAnimator = UIDynamicAnimator(referenceView: self)
@@ -358,7 +360,16 @@ open class CHKLineChartView: UIView {
         self.sightView?.isHidden = true
         self.sightView?.layer.cornerRadius = 2
         self.addSubview(self.sightView!)
-        
+
+        self.selectedPanel = CHFloatPanel(frame: CGRect.zero)
+        self.selectedPanel?.backgroundColor = self.closeValueBGColor
+        self.selectedPanel?.font = self.labelFont
+        self.selectedPanel?.textColor = self.closeValueTextColor
+        self.selectedPanel?.layer.borderWidth = 1
+        self.selectedPanel?.layer.borderColor = self.lineColor.cgColor
+        self.selectedPanel?.isHidden = true
+        self.addSubview(self.selectedPanel!)
+
         //绘画图层
         self.layer.addSublayer(self.drawLayer)
         
@@ -519,6 +530,7 @@ open class CHKLineChartView: UIView {
         //重置辅助线和准心颜色
         self.verticalLineView?.backgroundColor = self.selectedBGColor
         self.sightView?.backgroundColor = self.selectedBGColor
+        self.selectedPanel?.backgroundColor = self.closeValueBGColor
         
         let yaxis = section!.yAxis
         
@@ -614,7 +626,17 @@ open class CHKLineChartView: UIView {
                 self.selectedXAxisLabel?.frame = CGRect(x: x, y: showXAxisSection.frame.maxY, width: size.width  + 6, height: self.labelSize.height)
                 
                 self.sightView?.center = CGPoint(x: hx, y: vy)
-                
+
+                let change = item.closePrice - item.openPrice
+                let changePercent = change / item.openPrice * 100
+                self.selectedPanel?.showChartItem(time: time, open: item.openPrice.ch_toString(0, maxF: yaxis.decimal, minI: 1), high: item.highPrice.ch_toString(0, maxF: yaxis.decimal, minI: 1), low: item.lowPrice.ch_toString(0, maxF: yaxis.decimal, minI: 1), close: item.closePrice.ch_toString(0, maxF: yaxis.decimal, minI: 1), change: change.ch_toString(0, maxF: yaxis.decimal, minI: 1), changePercent: changePercent.ch_toString(maxF: 2) + "%", vol: item.vol.ch_toString())
+                let panelWidth = self.selectedPanel!.frame.width
+                let panelMargin: CGFloat = 10
+                let panelX = point.x < (self.frame.width / 2) ? self.frame.width - panelWidth - panelMargin : panelMargin
+                self.selectedPanel?.translatesAutoresizingMaskIntoConstraints = true
+                self.selectedPanel?.frame = CGRect(origin: CGPoint(x: panelX, y: 20), size: self.selectedPanel!.frame.size)
+                self.translatesAutoresizingMaskIntoConstraints = false
+
                 //给用户进行最后的自定义
                 self.delegate?.kLineChart?(chart: self, viewOfYAxis: self.selectedXAxisLabel!, viewOfXAxis: self.selectedYAxisLabel!)
                 
@@ -625,6 +647,7 @@ open class CHKLineChartView: UIView {
                 self.bringSubviewToFront(self.selectedXAxisLabel!)
                 self.bringSubviewToFront(self.selectedYAxisLabel!)
                 self.bringSubviewToFront(self.sightView!)
+                self.bringSubviewToFront(self.selectedPanel!)
                 
                 //设置选中点
                 self.setSelectedIndexByIndex(i)
@@ -687,6 +710,7 @@ open class CHKLineChartView: UIView {
         self.selectedYAxisLabel?.isHidden = true
         self.selectedXAxisLabel?.isHidden = true
         self.sightView?.isHidden = true
+        self.selectedPanel?.isHidden = true
     }
 }
 

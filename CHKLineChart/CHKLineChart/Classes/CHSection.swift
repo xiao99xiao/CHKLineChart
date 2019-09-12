@@ -486,28 +486,30 @@ extension CHSection {
             let item = model[chartSelectedIndex]
             switch model {
             case is CHCandleModel:
+
+                continue
                 
-                if model.key != CHSeriesKey.candle {
-                    continue  //不限蜡烛柱
-                }
-                
-                //涨跌幅
-                var change: CGFloat = 0
-                if item.openPrice > 0 {
-                    change = (item.closePrice - item.openPrice) / item.openPrice * 100
-                }
-                
-                
-                title += NSLocalizedString("O", comment: "") + ": " +
-                    item.openPrice.ch_toString(maxF: self.decimal) + "  "   //开始
-                title += NSLocalizedString("H", comment: "") + ": " +
-                    item.highPrice.ch_toString(maxF: self.decimal) + "  "   //最高
-                title += NSLocalizedString("L", comment: "") + ": " +
-                    item.lowPrice.ch_toString(maxF: self.decimal) + "  "    //最低
-                title += NSLocalizedString("C", comment: "") + ": " +
-                    item.closePrice.ch_toString(maxF: self.decimal) + "  "  //收市
-                title += NSLocalizedString("Chg", comment: "") + ": " +
-                    change.ch_toString(maxF: 2) + "%   "        //涨跌幅
+//                if model.key != CHSeriesKey.candle {
+//                    continue  //不限蜡烛柱
+//                }
+//
+//                //涨跌幅
+//                var change: CGFloat = 0
+//                if item.openPrice > 0 {
+//                    change = (item.closePrice - item.openPrice) / item.openPrice * 100
+//                }
+//
+//
+//                title += NSLocalizedString("O", comment: "") + ": " +
+//                    item.openPrice.ch_toString(maxF: self.decimal) + "  "   //开始
+//                title += NSLocalizedString("H", comment: "") + ": " +
+//                    item.highPrice.ch_toString(maxF: self.decimal) + "  "   //最高
+//                title += NSLocalizedString("L", comment: "") + ": " +
+//                    item.lowPrice.ch_toString(maxF: self.decimal) + "  "    //最低
+//                title += NSLocalizedString("C", comment: "") + ": " +
+//                    item.closePrice.ch_toString(maxF: self.decimal) + "  "  //收市
+//                title += NSLocalizedString("Chg", comment: "") + ": " +
+//                    change.ch_toString(maxF: 2) + "%   "        //涨跌幅
                 
             case is CHColumnModel:
                 

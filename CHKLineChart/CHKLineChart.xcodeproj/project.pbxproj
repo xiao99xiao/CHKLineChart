@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		880578C12328DD3E0098BFCF /* CHFloatPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880578C02328DD3D0098BFCF /* CHFloatPanel.swift */; };
 		C5DAC4562044F85000D16B84 /* CHChartImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5B8F15D1EFB769F0082E969 /* CHChartImageGenerator.swift */; };
 		C5F59ED41FA883DF00AD85A2 /* CHKLineChartKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C5F59ED21FA883DF00AD85A2 /* CHKLineChartKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C5F59EDD1FA8840000AD85A2 /* CHSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E4E06E1D76CF6200C47F5A /* CHSection.swift */; };
@@ -26,6 +27,7 @@
 		26A04E5DC2417C7350CB690A /* Pods_CHKLineChart.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CHKLineChart.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3999AEE1D8C13CBE0F47A12B /* Pods-CHKLineChart.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHKLineChart.release.xcconfig"; path = "Pods/Target Support Files/Pods-CHKLineChart/Pods-CHKLineChart.release.xcconfig"; sourceTree = "<group>"; };
 		6349AF5F1FE2C1220C72A35B /* Pods-CHKLineChart.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CHKLineChart.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CHKLineChart/Pods-CHKLineChart.debug.xcconfig"; sourceTree = "<group>"; };
+		880578C02328DD3D0098BFCF /* CHFloatPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CHFloatPanel.swift; path = Classes/CHFloatPanel.swift; sourceTree = "<group>"; };
 		C502BEF51F01168100E1BE8F /* CHDepthChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CHDepthChartView.swift; path = Classes/CHDepthChartView.swift; sourceTree = "<group>"; };
 		C54926651D8923BB0074ACD2 /* CHChartAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CHChartAlgorithm.swift; path = Classes/CHChartAlgorithm.swift; sourceTree = "<group>"; };
 		C559F2581D80FC22002B1E57 /* CHExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CHExtension.swift; path = Classes/CHExtension.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				C5E4E06E1D76CF6200C47F5A /* CHSection.swift */,
 				C5E4E0701D76D7F800C47F5A /* CHAxisModel.swift */,
 				C5F7FFFA1D7EA57A00622E60 /* CHKLineChart.swift */,
+				880578C02328DD3D0098BFCF /* CHFloatPanel.swift */,
 				C559F2581D80FC22002B1E57 /* CHExtension.swift */,
 				C56F6E561D879941002320D2 /* CHSeries.swift */,
 				C54926651D8923BB0074ACD2 /* CHChartAlgorithm.swift */,
@@ -220,6 +223,7 @@
 				C5DAC4562044F85000D16B84 /* CHChartImageGenerator.swift in Sources */,
 				C5F59EE71FA8840000AD85A2 /* CHDepthChartView.swift in Sources */,
 				C5F59EE11FA8840000AD85A2 /* CHExtension.swift in Sources */,
+				880578C12328DD3E0098BFCF /* CHFloatPanel.swift in Sources */,
 				C5F59EE51FA8840000AD85A2 /* CHDynamicItem.swift in Sources */,
 				C5F59EDF1FA8840000AD85A2 /* CHKLineChart.swift in Sources */,
 				C5F59EE31FA8840000AD85A2 /* CHChartAlgorithm.swift in Sources */,

@@ -80,7 +80,7 @@ open class CHFloatPanel: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setTitle(time: String, open: String, high: String, low: String, close: String, change: String, changePercent: String, vol: String) {
+    public func setTitle(time: String, open: String, high: String, low: String, close: String, change: String, changePercent: String, vol: String) {
         timeTitle.text = time
         openTitle.text = open
         highTitle.text = high

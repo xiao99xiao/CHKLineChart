@@ -530,12 +530,9 @@ open class CHKLineChartView: UIView {
         //重置辅助线和准心颜色
         self.verticalLineView?.backgroundColor = self.selectedBGColor
         self.sightView?.backgroundColor = self.selectedBGColor
-        self.selectedPanel?.backgroundColor = self.closeValueBGColor
         self.selectedPanel?.upColor = self.upColor
         self.selectedPanel?.downColor = self.downColor
-        self.selectedPanel?.backgroundColor = self.closeValueBGColor
         self.selectedPanel?.textColor = self.closeValueTextColor
-        self.selectedPanel?.layer.borderColor = self.lineColor.cgColor
         
         let yaxis = section!.yAxis
         

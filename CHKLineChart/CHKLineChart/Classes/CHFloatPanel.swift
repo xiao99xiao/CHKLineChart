@@ -28,13 +28,10 @@ open class CHFloatPanel: UIView {
     private var changePercentLabel: UILabel = UILabel()
     private var volLabel: UILabel = UILabel()
 
+    var upColor: UIColor = UIColor.green     //升的颜色
+    var downColor: UIColor = UIColor.red     //跌的颜色
+
     private var labels = [[UILabel]]()
-//    private let dateFormatter = { () -> DateFormatter in
-//        let formatter = DateFormatter()
-//        formatter.locale = Locale(identifier: "en_US")
-//        formatter.dateStyle = .short
-//        return formatter
-//    }()
 
     public var font: UIFont = UIFont.systemFont(ofSize: 10) {
         didSet {
@@ -50,7 +47,6 @@ open class CHFloatPanel: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        titles = [timeTitle, openTitle, highTitle, lowTitle, closeTitle, changeTitle, changePercentTitle, volTitle]
         labels = [[timeTitle, timeLabel], [openTitle, openLabel], [highTitle, highLabel], [lowTitle, lowLabel], [closeTitle, closeLabel], [changeTitle, changeLabel], [changePercentTitle, changePercentLabel], [volTitle, volLabel]]
         labels.forEach { (labels) in
             labels[1].textAlignment = .right
@@ -80,8 +76,6 @@ open class CHFloatPanel: UIView {
         translatesAutoresizingMaskIntoConstraints = false
     }
 
-//    func setFont
-
     required public init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -96,13 +90,6 @@ open class CHFloatPanel: UIView {
         changePercentTitle.text = changePercent
         volTitle.text = vol
         sizeToFit()
-//        timeTitle.sizeToFit()
-//        openTitle.sizeToFit()
-//        highTitle.sizeToFit()
-//        lowTitle.sizeToFit()
-//        closeTitle.sizeToFit()
-//        changePercentTitle.sizeToFit()
-//        volTitle.sizeToFit()
     }
 
     func showChartItem(time: String, open: String, high: String, low: String, close: String, change: String, changePercent: String, vol: String) {
@@ -114,6 +101,8 @@ open class CHFloatPanel: UIView {
         changeLabel.text = change
         changePercentLabel.text = changePercent
         volLabel.text = vol
+        let changeColor = change.starts(with: "-") ? downColor : upColor
+        [changeLabel, changePercentLabel].forEach({$0.textColor = changeColor})
     }
 
 }

@@ -531,6 +531,8 @@ open class CHKLineChartView: UIView {
         self.verticalLineView?.backgroundColor = self.selectedBGColor
         self.sightView?.backgroundColor = self.selectedBGColor
         self.selectedPanel?.backgroundColor = self.closeValueBGColor
+        self.selectedPanel?.upColor = self.upColor
+        self.selectedPanel?.downColor = self.downColor
         
         let yaxis = section!.yAxis
         

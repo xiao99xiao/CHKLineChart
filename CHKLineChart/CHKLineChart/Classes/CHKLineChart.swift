@@ -1368,7 +1368,7 @@ extension CHKLineChartView {
         if iy > (section.frame.size.height - section.padding.bottom) {
             iy = section.frame.size.height - closeValueCornerRadius
         } else if iy < section.padding.top {
-            iy = section.frame.origin.y + section.padding.top - closeValueCornerRadius
+            iy = section.frame.origin.y + section.padding.top / 2 - closeValueCornerRadius
         }
 
         let leftRangeDistance = index - rangeFrom

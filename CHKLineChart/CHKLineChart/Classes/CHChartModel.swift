@@ -686,7 +686,7 @@ public extension CHChartModel {
         //判断绘画完整时是否超过界限
         var maxPriceStartX = point.x + arrowLineWidth * 2
         var maxPriceStartY: CGFloat = 0
-        if maxPriceStartX + fontSize.width > section.frame.origin.x + section.frame.size.width - section.padding.right {
+        if maxPriceStartX + fontSize.width * 2 > section.frame.origin.x + section.frame.size.width - section.padding.right {
             //超过了最右边界，则反方向画
             isLeft = -1
             maxPriceStartX = point.x + arrowLineWidth * isLeft * 2 - fontSize.width

@@ -373,9 +373,7 @@ open class CHKLineChartView: UIView {
         self.selectedPanel?.layer.borderWidth = 1
         self.selectedPanel?.layer.borderColor = self.lineColor.cgColor
         self.selectedPanel?.isHidden = true
-        if showSelectedPanel {
-            self.addSubview(self.selectedPanel!)
-        }
+        self.addSubview(self.selectedPanel!)
 
         //绘画图层
         self.layer.addSublayer(self.drawLayer)

@@ -751,8 +751,9 @@ extension CHKLineChartView {
         
         //初始化数据
         if self.initChart() {
-            
-            
+
+            self.layer.masksToBounds = true
+
             /// 待绘制的x坐标标签
             var xAxisToDraw = [(CGRect, String)]()
             
